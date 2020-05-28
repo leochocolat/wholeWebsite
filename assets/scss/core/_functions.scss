@@ -1,0 +1,7 @@
+@function size($col, $col-amount) {
+    @return ($col / $col-amount) * 100%
+};
+
+@function getVideoHeightFromWidth($col, $col-amount, $container-padding, $ratio) {
+    @return calc(calc(100vw - #{$container-padding}) * #{$col / $col-amount} * #{$ratio})
+}

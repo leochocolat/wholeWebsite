@@ -23,6 +23,12 @@ module.exports = {
     '@/assets/scss/app.scss'
   ],
   /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [
+    '~/plugins/listeners.client',
+  ],
+  /*
   ** Build configuration
   */
   build: {

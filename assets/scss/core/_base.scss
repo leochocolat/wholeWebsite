@@ -1,0 +1,19 @@
+html, body {
+    position: relative;
+
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    overscroll-behavior-y: none;
+    overscroll-behavior-block: none;
+    
+    &.isScrollEnable {
+        overflow-y: auto;
+    }
+
+    font-family: $exo;
+}
+
+.js-scroll-content {
+    width: 100%;
+}

@@ -1,6 +1,8 @@
 <template>
   <div class="page-home">
-    {{ data.fields }}
+    <div class="container">
+      {{ data.fields }}
+    </div>
   </div>
 </template>
 

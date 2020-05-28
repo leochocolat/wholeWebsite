@@ -1,0 +1,31 @@
+@mixin font-face($font-family, $weight, $url) {
+	@font-face {
+		font-family: '#{$font-family}';
+		src: url('/#{$url}.eot');
+        src: url('/#{$url}.eot?#iefix') format('embedded-opentype'),
+             url('/#{$url}.woff2') format('woff2'),
+		     url('/#{$url}.woff') format('woff'),
+		     url('/#{$url}.ttf') format('truetype'),
+		     url('/#{$url}.svg') format('svg');
+        font-style: normal;
+        font-display: swap;
+        font-weight: $weight;
+        -webkit-font-smoothing: antialiased;
+        -khtml-font-smoothing: antialiased;
+        -apple-font-smoothing: antialiased;
+        font-smooth: always;
+        -moz-osx-font-smoothing: grayscale;
+	}
+}
+
+@include font-face('Exo', 200, 'Exo-ExtraLight');
+@include font-face('Exo', 300, 'Exo-Light');
+@include font-face('Exo', 400, 'Exo-Regular');
+@include font-face('Exo', 500, 'Exo-Medium');
+@include font-face('Exo', 600, 'Exo-Bold');
+
+$base-font-size: 16px;
+
+@function rem($px, $base: $base-font-size) {
+    @return ($px / $base) * 1rem;
+};
