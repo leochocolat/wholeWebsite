@@ -3,42 +3,34 @@ import { mapGetters } from 'vuex';
 
 export default {
     mounted() {
-        this.setup();
-        this.setupSession();
-        this.setupCurrentPage();
+        this._setup();
+        this._setupSession();
+        this._setupCurrentPage();
     },
     methods: {
-        setupSession() {
-            if (!this.session) {
-                if (this.startLoading) {
-                    this.startLoading();
-                }
-                this.$store.dispatch('session/setSession', Date.now());
-            } else {
-                ScrollManager.enable();
-
-                if (this.removeLoading) {
-                    this.removeLoading();
-                }
-            }
+        _setup() {
+            ScrollManager.enable();
         },
-        setupCurrentPage() {
-            this.$store.dispatch('page/setCurrent', this.name);
-            document.querySelector('html').classList.add(`${this.name}`);
-            document.body.classList.add(`${this.name}`);
+        _setupSession() {
+            if (this.session) return;
+            this.$store.dispatch('session/setSession', Date.now());
+        },
+        _setupCurrentPage() {
+            this.$store.dispatch('page/setCurrent', this.namespace);
+            document.querySelector('html').classList.add(`${this.namespace}`);
+            document.body.classList.add(`${this.namespace}`);
         }
     },
     computed: {
         ...mapGetters({
-          scrollPosition: ['scroll/position'],
           session: ['session/session'],
           currentPage: ['page/current'],
           previousPage: ['page/previous'],
         }),
     },
     beforeDestroy() {
-        document.querySelector('html').classList.remove(`${this.name}`);
-        document.body.classList.remove(`${this.name}`);
+        document.querySelector('html').classList.remove(`${this.namespace}`);
+        document.body.classList.remove(`${this.namespace}`);
         ScrollManager.disable();
 
         if (this.scrollModule) {

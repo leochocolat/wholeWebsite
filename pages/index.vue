@@ -1,7 +1,7 @@
 <template>
   <div class="page-home">
-    <div class="container">
-      {{ data.fields }}
+    <div class="container page-home__container">
+      <h1 class="heading page-home__heading">{{ data.fields.title }}</h1>
     </div>
   </div>
 </template>
@@ -10,7 +10,11 @@
 import { createClient } from '~/plugins/contentful.js';
 const client = createClient();
 
+import page from '~/assets/javascript/mixins/page';
+
 export default {
+  data() { return { namespace: 'home' } },
+  mixins: [page],
   components: {},
   asyncData({ env }) {
     return Promise.all([
