@@ -2,6 +2,7 @@ import { gsap } from 'gsap';
 import Emitter from '../events/Emitter';
 import bindAll from '../utils/bindAll';
 
+import ThreeBackgroundPlane from '../modules/threeModules/ThreeBackgroundPlane';
 import ThreeLightHouse from '../modules/threeModules/ThreeLightHouse';
 import ThreeLights from '../modules/threeModules/ThreeLights';
 
@@ -22,8 +23,10 @@ class ThreeSceneComponent {
     }
 
     _setup() {
+        this._setupDeltaTime();
         this._setupScene();
         this._resize();
+        this._setupBackgroundPlane();
         this._setupLighthouse();
         this._setupLights();
         this._setupEventListeners();
@@ -43,6 +46,20 @@ class ThreeSceneComponent {
         this._camera.fov = (180 * (2 * Math.atan(this._height / 2 / PESPECTIVE))) / Math.PI;
         this._camera.aspect = this._width/this._height;
         this._camera.updateProjectionMatrix();
+
+        for (let name in this.sceneEntities) {
+            if (!this.sceneEntities[name].resize) continue;
+            this.sceneEntities[name].resize(width, height, devicePixelRatio)
+        }
+    }
+
+    _setupDeltaTime() {
+        this._time = 0;
+        this._startTime = Date.now();
+        this._dateNow = this._startTime;
+        this._lastTime = this._dateNow;
+        this._deltaTime = 16;
+        this._fps = Math.round(1000 / this._deltaTime);
     }
 
     _setupScene() {
@@ -61,6 +78,10 @@ class ThreeSceneComponent {
         this._camera.position.set(0, 0, PESPECTIVE);
     }
 
+    _setupBackgroundPlane() {
+        this.sceneEntities.backgroundPlane = new ThreeBackgroundPlane(this._scene, this._width, this._height);
+    }
+
     _setupLights() {
         this.sceneEntities.lights = new ThreeLights(this._scene);
         this.sceneEntities.lights.setTarget(this.sceneEntities.lighthouse.mesh);
@@ -70,9 +91,19 @@ class ThreeSceneComponent {
         this.sceneEntities.lighthouse = new ThreeLightHouse(this._scene, this._width, this._height);
     }
 
+    _updateDeltaTime() {
+        this._dateNow = Date.now();
+        this._time = this._dateNow - this._startTime;
+        this._deltaTime = this._dateNow - this._lastTime;
+        this._lastTime = this._dateNow;
+        this._fps = Math.round(1000 / this._deltaTime);
+    }
+
     _update() {
+        this._updateDeltaTime();
+
         for (let name in this.sceneEntities) {
-            this.sceneEntities[name].update();
+            this.sceneEntities[name].update(this._time, this._deltaTime, this._fps);
         }
 
         this._renderer.render(this._scene, this._camera);
