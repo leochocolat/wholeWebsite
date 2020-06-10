@@ -1,7 +1,9 @@
 <template>
-  <div class="page-home">
-    <div class="container page-home__container">
-      <h1 class="heading page-home__heading">{{ data.fields.title }}</h1>
+  <div class="page-home js-scroll-container">
+    <div class="js-scroll-content">
+      <div class="container page-home__container">
+        <h1 class="heading page-home__heading">{{ data.fields.title }}</h1>
+      </div>
     </div>
   </div>
 </template>

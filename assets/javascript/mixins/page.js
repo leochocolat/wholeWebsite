@@ -1,15 +1,27 @@
 import ScrollManager from '../managers/ScrollManager';
+import ScrollModule from '../modules/ScrollModule';
 import { mapGetters } from 'vuex';
 
 export default {
     mounted() {
         this._setup();
+        this._setupSmoothScroll();
         this._setupSession();
         this._setupCurrentPage();
     },
     methods: {
         _setup() {
             ScrollManager.enable();
+        },
+        _setupSmoothScroll() {
+            this._scrollModule = new ScrollModule({
+                container: this.$el,
+                content: this.$el.querySelector('.js-scroll-content'),
+                smooth: true,
+                smoothValue: 0.1
+            });
+
+            this._scrollModule.start();
         },
         _setupSession() {
             if (this.session) return;

@@ -30,6 +30,8 @@ class ResizeManager extends EventDispatcher {
         
         this._viewportWidth = Math.min(window.innerWidth || 0);
         this._viewportHeight = Math.min(window.innerHeight || 0);
+    
+        this._devicePixelRatio = window.devicePixelRatio;
 
         if (delta > MIN_HEIGHT_RESIZE) { this._resizeCssViewportVariable() };
     }
@@ -58,7 +60,8 @@ class ResizeManager extends EventDispatcher {
             viewportWidth: this._viewportWidth,
             viewportHeight: this._viewportHeight,
             documentWidth: this._documentWidth,
-            documentHeight: this._documentHeight
+            documentHeight: this._documentHeight,
+            devicePixelRatio: this._devicePixelRatio,
         });
 
         clearTimeout(this._timeout);
@@ -75,7 +78,8 @@ class ResizeManager extends EventDispatcher {
             viewportWidth: this._viewportWidth,
             viewportHeight: this._viewportHeight,
             documentWidth: this._documentWidth,
-            documentHeight: this._documentHeight
+            documentHeight: this._documentHeight,
+            devicePixelRatio: this._devicePixelRatio,
         });
     }
 }

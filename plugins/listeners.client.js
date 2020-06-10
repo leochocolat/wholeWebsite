@@ -21,7 +21,8 @@ export default ({ store }) => {
     function setupEventListener () {
         ResizeManager.addEventListener('resize', resizeHandler);
         ResizeManager.addEventListener('resize:end', resizeEndHandler);
-        ScrollManager.addEventListener('scroll:end', scrollEndHandler)
+        ScrollManager.addEventListener('scroll', scrollHandler);
+        ScrollManager.addEventListener('scroll:end', scrollEndHandler);
     }
 
     function resizeHandler(e) {
@@ -39,10 +40,11 @@ export default ({ store }) => {
     }
 
     function scrollEndHandler(e) {
-        store.dispatch('scroll/setPosition', {
-            x: e.x,
-            y: e.y,
-        });
+        Emitter.emit('SCROLL:END', e);
+    }
+
+    function scrollHandler(e) {
+        Emitter.emit('SCROLL', e);
     }
 
     setup();

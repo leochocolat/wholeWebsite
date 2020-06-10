@@ -1,4 +1,5 @@
-const config = require('./.contentful.json')
+const config = require('./.contentful.json');
+const webpack = require('webpack');
 
 module.exports = {
   head: {
@@ -32,8 +33,16 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        THREE: 'three',
+      }),
+    ],
     extend (config, ctx) {
-      
+      config.module.rules.push({
+        test: /\.(glsl|vs|fs)$/,
+        loader: 'raw-loader'
+      })  
     }
   },
   env: {
