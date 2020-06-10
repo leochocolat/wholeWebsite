@@ -70,7 +70,7 @@ class ThreeSceneComponent {
             alpha: true
         });
 
-        // this._renderer.setClearColor(0x1F1F1F);
+        this._renderer.setClearColor(0x000000);
 
         const fov = (180 * (2 * Math.atan(this.el.height / 2 / PESPECTIVE))) / Math.PI;
 
