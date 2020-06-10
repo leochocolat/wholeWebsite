@@ -17,7 +17,9 @@ class ThreeBackgroundPlane {
     }
 
     update(time, deltaTime, fps) {
-        console.log(time, deltaTime, fps);
+        this._uniforms.u_time.value = time;
+        this._uniforms.u_delta_time.value = deltaTime;
+        this._uniforms.u_fps.value = fps;
     }
 
     resize(width, height) {
@@ -25,6 +27,7 @@ class ThreeBackgroundPlane {
         this._height = height;
 
         this._mesh.scale.set(this._width * (this._width/POS_Z), this._height * (this._height/POS_Z), 1);
+        this._uniforms.u_resolution.value.set(this.width, this.height, 1);
     }
 
     _setup() {
@@ -33,7 +36,14 @@ class ThreeBackgroundPlane {
 
     _setupPlane() {
         this._uniforms = {
-
+            u_resolution: { value: new THREE.Vector3(this._width, this._height, 0) },
+            u_time: { value: 0 },
+            u_delta_time: { value: 17 },
+            u_fps: { value: 60 },
+            //colors
+            u_primary_color: { value: new THREE.Color(0xD493B8) },
+            u_secondary_color: { value: new THREE.Color(0x393C60) },
+            u_third_color: { value: new THREE.Color(0x0015FF) },
         }
 
         let geometry = new THREE.PlaneGeometry(1, 1, 1);
