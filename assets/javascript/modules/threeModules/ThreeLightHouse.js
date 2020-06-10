@@ -41,12 +41,13 @@ class ThreeLightHouse {
     }
 
     _setupLightHouse() {
-        this._mesh.scale.set(10, 10, 10);
+        this._mesh.scale.set(7.5, 7.5, 7.5);
 
         this._mesh.rotation.y = this._scrollPosittion.y * 0.002 + 15;
 
         this._mesh.position.x = this._scrollPosittion.y * 1.5 + this._width * 0.2;
-        this._mesh.position.y = this._scrollPosittion.y  - 200;
+        this._mesh.position.y = this._scrollPosittion.y - 200;
+        this._mesh.position.z = this._scrollDelta * 0.05 + 200;
 
         this._scene.add(this._mesh);
     }
@@ -56,6 +57,7 @@ class ThreeLightHouse {
 
         this._mesh.position.x += this._scrollDelta * 1.5;
         this._mesh.position.y += this._scrollDelta * 0.5;
+        this._mesh.position.z += this._scrollDelta * 0.05;
     }
 
     _bindAll() {

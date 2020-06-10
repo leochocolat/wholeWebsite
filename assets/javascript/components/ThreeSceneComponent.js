@@ -5,6 +5,8 @@ import bindAll from '../utils/bindAll';
 import ThreeBackgroundPlane from '../modules/threeModules/ThreeBackgroundPlane';
 import ThreeLightHouse from '../modules/threeModules/ThreeLightHouse';
 import ThreeLights from '../modules/threeModules/ThreeLights';
+import ThreeFog from '../modules/threeModules/ThreeFog';
+import ThreeParticleSystem from '../modules/threeModules/ThreeParticleSystem';
 
 const PESPECTIVE = 800;
 
@@ -24,11 +26,17 @@ class ThreeSceneComponent {
 
     _setup() {
         this._setupDeltaTime();
+
         this._setupScene();
         this._resize();
+
+        //scene entities
+        this._setupParticleSystem();
+        this._setupFog();
         this._setupBackgroundPlane();
         this._setupLighthouse();
         this._setupLights();
+
         this._setupEventListeners();
     }
 
@@ -64,7 +72,8 @@ class ThreeSceneComponent {
 
     _setupScene() {
         this._scene = new THREE.Scene();
-        this._scene.fog = new THREE.FogExp2(0xD493B8, 0.0012);
+        // this._scene.fog = new THREE.FogExp2(0xD493B8, 0.0012);
+        // this._scene.fog = new THREE.Fog(0x393C60, 0.0035);
 
 		this._renderer = new THREE.WebGLRenderer({
             canvas: this.el,
@@ -77,6 +86,17 @@ class ThreeSceneComponent {
 
         this._camera = new THREE.PerspectiveCamera(fov, this.el.width / this.el.height, 1, 1000);
         this._camera.position.set(0, 0, PESPECTIVE);
+    }
+
+    /*
+    Scene Entities
+    */
+    _setupParticleSystem() {
+        this.sceneEntities.particleSystem = new ThreeParticleSystem(this._scene, this._width, this._height);
+    }
+
+    _setupFog() {
+        this.sceneEntities.fog = new ThreeFog(this._scene);
     }
 
     _setupBackgroundPlane() {
@@ -104,6 +124,8 @@ class ThreeSceneComponent {
         this._updateDeltaTime();
 
         for (let name in this.sceneEntities) {
+            if (!this.sceneEntities[name].update) continue;
+
             this.sceneEntities[name].update(this._time, this._deltaTime, this._fps);
         }
 

@@ -8,20 +8,16 @@ uniform float u_time;
 
 varying vec2 vUv;
 
-// void mainImage( out vec4 fragColor, in vec2 fragCoord )
-// {
-// 	vec2 position = fragCoord.xy;
-//     vec2 uv = fragCoord.xy / u_resolution.xy;
-//     // vec2 uv = vUv;
-
-// 	fragColor = vec4(1.0, 1.0, 1.0, 1.0);
-// }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
     vec3 res = u_resolution;
 
-    fragColor = vec4(u_primary_color.x, u_primary_color.y, u_primary_color.z, 1.0);
+    vec4 tex_primary = vec4(u_primary_color.x, u_primary_color.y, u_primary_color.z, 1.0);
+    vec4 tex_secondary = vec4(u_secondary_color.x, u_secondary_color.y, u_secondary_color.z, 1.0);
+    vec4 tex_third = vec4(u_third_color.x, u_third_color.y, u_third_color.z, 1.0);
+
+    fragColor = tex_secondary;
 }
 
 void main()
