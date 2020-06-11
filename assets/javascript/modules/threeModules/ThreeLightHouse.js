@@ -57,7 +57,7 @@ class ThreeLightHouse {
 
         this._mesh.position.x += this._scrollDelta * 1.5;
         this._mesh.position.y += this._scrollDelta * 0.5;
-        this._mesh.position.z += this._scrollDelta * 0.05;
+        this._mesh.position.z += this._scrollDelta * 0.3;
     }
 
     _bindAll() {
@@ -79,6 +79,7 @@ class ThreeLightHouse {
     }
 
     _modelLoadedHandler(e) {
+        Emitter.emit('MODEL:LOADED', e.scene);
         this._mesh = e.scene;
 
         this._setupLightHouse();

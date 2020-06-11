@@ -8,6 +8,9 @@ import ThreeLights from '../modules/threeModules/ThreeLights';
 import ThreeFog from '../modules/threeModules/ThreeFog';
 import ThreeParticleSystem from '../modules/threeModules/ThreeParticleSystem';
 
+import Worker from '../workers/file.worker.js';
+
+
 const PESPECTIVE = 800;
 
 class ThreeSceneComponent {
@@ -18,6 +21,8 @@ class ThreeSceneComponent {
 
         this._bindAll();
         this._setup();
+
+        const worker = new Worker();
     }
 
     close() {
@@ -80,7 +85,7 @@ class ThreeSceneComponent {
             alpha: true
         });
 
-        this._renderer.setClearColor(0x000000);
+        this._renderer.setClearColor(0x393C60);
 
         const fov = (180 * (2 * Math.atan(this.el.height / 2 / PESPECTIVE))) / Math.PI;
 

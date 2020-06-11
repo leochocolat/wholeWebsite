@@ -23,7 +23,7 @@ class ThreeLights {
 
     _setup() {
         this._ambientLight = new THREE.AmbientLight(0xffffff);
-        this._directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        this._directionalLight = new THREE.DirectionalLight(0xffffff, 1);
         this._spotLightPink = new THREE.SpotLight(0xD493B8, 1);
         this._spotLightPink.position.set(500, 500, 1000);
 

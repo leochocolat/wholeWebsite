@@ -5,7 +5,6 @@ class ThreeParticleSystem {
         this._height = height;
 
         this._amount = 1000;
-        this._particles = new THREE.Geometry();
 
         this._setup();
     }
@@ -13,7 +12,7 @@ class ThreeParticleSystem {
     update() {
         if (!this._particleSystem) return;
 
-        // this._particleSystem.rotation.y += 0.001;
+        this._particleSystem.rotation.y += 0.001;
     }
 
     resize(width, height) {
@@ -29,12 +28,16 @@ class ThreeParticleSystem {
     }
 
     _setupParticles(texture) {
+        let geometry = new THREE.BufferGeometry();
+        let vertices = [];
+
         let material = new THREE.PointsMaterial({
             color: 0xFFFFFF,
             size: 10,
             map: texture,
             blending: THREE.AdditiveBlending,
-            transparent: true
+            transparent: true,
+            depthTest: false
         });
 
         for (let i = 0; i < this._amount; i++) {
@@ -42,19 +45,14 @@ class ThreeParticleSystem {
             const y = Math.random() * this._height - this._height/2;
             const z = Math.random() * -500;
 
-            const particle = new THREE.Vector3(x, y, z);
-            particle.velocity = new THREE.Vector3(
-                Math.random(),
-                Math.random(),
-                Math.random(),
-            )
-
-            this._particles.vertices.push(particle);
+            vertices.push(x, y, z);
         }
 
-        this._particleSystem = new THREE.Points(this._particles, material);
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-        this._scene.add(this._particleSystem);
+        this._particleSystem = new THREE.Points(geometry, material);
+
+        // this._scene.add(this._particleSystem);
     }
 
     _setupEventListeners() {

@@ -57,7 +57,7 @@ class ThreeBackgroundPlane {
         this._mesh.position.set(0, 0, POS_Z);
         this._mesh.scale.set(this._width * (this._width/POS_Z), this._height * (this._height/POS_Z), 1);
 
-        this._scene.add(this._mesh);
+        // this._scene.add(this._mesh);
     }
 }
 
