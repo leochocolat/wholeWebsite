@@ -8,9 +8,6 @@ import ThreeLights from '../modules/threeModules/ThreeLights';
 import ThreeFog from '../modules/threeModules/ThreeFog';
 import ThreeParticleSystem from '../modules/threeModules/ThreeParticleSystem';
 
-import Worker from '../workers/file.worker.js';
-
-
 const PESPECTIVE = 800;
 
 class ThreeSceneComponent {
@@ -21,8 +18,6 @@ class ThreeSceneComponent {
 
         this._bindAll();
         this._setup();
-
-        const worker = new Worker();
     }
 
     close() {

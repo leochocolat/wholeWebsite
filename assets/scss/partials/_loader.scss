@@ -8,3 +8,26 @@
 
     // background-color: rgba(0, 0, 0, 0.5);
 }
+
+.loader__canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.loader__container {
+    position: relative;
+
+    height: 100vh;
+}
+
+.loader__progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    color: $white;
+
+    font-size: rem(100px);
+    font-weight: 400;
+}

@@ -37,6 +37,8 @@ class ThreeLightHouse {
     }
 
     _loadModel() {
+        Emitter.emit('MODEL:STARTLOADING', {});
+        
         new GLTFLoader().load('/models/lighthouse.gltf', this._modelLoadedHandler);
     }
 
