@@ -72,8 +72,6 @@ class ThreeSceneComponent {
 
     _setupScene() {
         this._scene = new THREE.Scene();
-        // this._scene.fog = new THREE.FogExp2(0xD493B8, 0.0012);
-        // this._scene.fog = new THREE.Fog(0x393C60, 0.0035);
 
 		this._renderer = new THREE.WebGLRenderer({
             canvas: this.el,

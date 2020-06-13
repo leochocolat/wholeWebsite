@@ -1,5 +1,7 @@
 import fragment from '../../shaders/fragment.glsl';
 import vertex from '../../shaders/vertex.glsl';
+import Emitter from '../../events/Emitter';
+import bindAll from '../../utils/bindAll';
 
 const POS_Z = -200;
 
@@ -9,6 +11,7 @@ class ThreeBackgroundPlane {
         this._width = width;
         this._height = height;
 
+        this._bindAll();
         this._setup();
     }
 
@@ -32,6 +35,7 @@ class ThreeBackgroundPlane {
 
     _setup() {
         this._setupPlane();
+        this._setupEventListeners();
     }
 
     _setupPlane() {
@@ -42,7 +46,9 @@ class ThreeBackgroundPlane {
             u_fps: { value: 60 },
             //colors
             u_primary_color: { value: new THREE.Color(0xD493B8), type : 'c' },
+            u_primary_position: { value: 0.0 },
             u_secondary_color: { value: new THREE.Color(0x393C60), type : 'c' },
+            u_secondary_position: { value: 0.7 },
             u_third_color: { value: new THREE.Color(0x0015FF), type : 'c' },
         }
 
@@ -57,7 +63,30 @@ class ThreeBackgroundPlane {
         this._mesh.position.set(0, 0, POS_Z);
         this._mesh.scale.set(this._width * (this._width/POS_Z), this._height * (this._height/POS_Z), 1);
 
-        // this._scene.add(this._mesh);
+        this._scene.add(this._mesh);
+    }
+
+    _bindAll() {
+        bindAll(
+            this,
+            '_scrollHandler'
+        );
+    }
+
+    _setupEventListeners() {
+        Emitter.on('EXPERIENCE:START', this._startHandler);
+        Emitter.on('SCROLL', this._scrollHandler);
+    }
+
+    _startHandler() {
+        
+    }
+
+    _scrollHandler(e) {
+        const delta = e.delta;
+
+        // console.log(this._uniforms.u_secondary_position.value);
+        // this._uniforms.u_secondary_position.value += 0.001 * -delta;
     }
 }
 

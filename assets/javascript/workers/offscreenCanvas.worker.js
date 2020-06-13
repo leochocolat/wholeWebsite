@@ -1,4 +1,8 @@
 import * as THREE from 'three';
+import Emitter from '../events/Emitter';
+
+import fragment from '../shaders/particles/fragment.glsl';
+import vertex from '../shaders/particles/vertex.glsl';
 
 const PESPECTIVE = 800;
 let width, height, dpr;
@@ -8,6 +12,7 @@ let fov;
 const handlers = {
     setup,
     resize,
+    textureLoadedHandler
 };
 
 if (typeof self === "object") {
@@ -22,6 +27,12 @@ if (typeof self === "object") {
 }
 
 function setup(e) {
+    setupScene(e);
+
+    update();
+}
+
+function setupScene(e) {
     canvas = e.canvas;
     canvas.width = e.width;
     canvas.height = e.height;
@@ -35,8 +46,6 @@ function setup(e) {
 
     fov = (180 * (2 * Math.atan(height / 2 / PESPECTIVE))) / Math.PI;
     camera = new THREE.PerspectiveCamera(fov, width / height, 1, 1000);
-
-    update();
 }
 
 function resize(e) {
@@ -60,4 +69,9 @@ function update() {
     renderer.render(scene, camera);
 
     requestAnimationFrame(update);
+}
+
+function textureLoadedHandler(e) {
+    console.log(e.texture, e.image);
+    setupParticles(e.texture, e.image);
 }
