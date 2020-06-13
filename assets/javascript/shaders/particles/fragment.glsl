@@ -1,4 +1,17 @@
+// @author brunoimbrizi / http://brunoimbrizi.com
+
+precision highp float;
+
+uniform sampler2D uTexture;
+
+varying vec2 vPUv;
+varying vec2 vUv;
+
 void main() {
+	vec4 color = vec4(0.0);
+	vec2 uv = vUv;
+	vec2 puv = vPUv;
+
 	// pixel color
 	vec4 colA = texture2D(uTexture, puv);
 
@@ -16,5 +29,5 @@ void main() {
 	color = colB;
 	color.a = t;
 
-	// (...)
+	gl_FragColor = color;
 }

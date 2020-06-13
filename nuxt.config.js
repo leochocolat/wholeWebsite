@@ -39,10 +39,14 @@ module.exports = {
       }),
     ],
     extend (config, ctx) {
+      // config.module.rules.push({
+      //   test: /\.(glsl|vs|fs)$/,
+      //   loader: 'raw-loader'
+      // });
       config.module.rules.push({
-        test: /\.(glsl|vs|fs)$/,
-        loader: 'raw-loader'
-      });
+				test: /\.(glsl|frag|vert)$/,
+				use: ['glslify-import-loader', 'raw-loader', 'glslify-loader']
+			});
       if (ctx.isClient) {
         config.module.rules.push({
           test: /\.worker\.js$/,

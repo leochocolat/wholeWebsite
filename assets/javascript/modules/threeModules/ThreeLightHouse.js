@@ -56,6 +56,7 @@ class ThreeLightHouse {
 
     _updateLighthousePosition() {
         this._mesh.rotation.y -= this._scrollDelta * 0.0025;
+        this._mesh.rotation.z = this._scrollDelta * 0.0025;
 
         this._mesh.position.x += this._scrollDelta * 1.5;
         this._mesh.position.y += this._scrollDelta * 0.5;

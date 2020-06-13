@@ -1,9 +1,9 @@
 <template>
   <div class="page-home js-scroll-container">
     <div class="js-scroll-content">
-      <div class="container page-home__container">
-        <!-- <h1 class="heading page-home__heading">{{ data.fields.title }}</h1> -->
-      </div>
+      <section></section>
+      <section></section>
+      <section></section>
     </div>
   </div>
 </template>

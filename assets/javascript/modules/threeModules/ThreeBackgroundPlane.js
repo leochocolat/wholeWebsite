@@ -48,7 +48,7 @@ class ThreeBackgroundPlane {
             u_primary_color: { value: new THREE.Color(0xD493B8), type : 'c' },
             u_primary_position: { value: 0.0 },
             u_secondary_color: { value: new THREE.Color(0x393C60), type : 'c' },
-            u_secondary_position: { value: 0.7 },
+            u_secondary_position: { value: 0.0 },
             u_third_color: { value: new THREE.Color(0x0015FF), type : 'c' },
         }
 
