@@ -57,11 +57,11 @@ class LoaderCanvasComponent {
 
     _loadTexture() {
         let url = 'https://images.unsplash.com/photo-1591974250916-19041d07f4a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60';
-        // const loader = new THREE.TextureLoader();
-        // loader.load(url, response => {
-        //     this._texture = response;
-        //     this._setupImageData();
-        // });
+        const loader = new THREE.TextureLoader();
+        loader.load(url, response => {
+            this._texture = response;
+            this._setupImageData();
+        });
     }
 
     _setupImageData() {       
