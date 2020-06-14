@@ -13,6 +13,8 @@ class ThreeCanvasComponent {
 
         this._bindAll();
         this._setup();
+
+        console.log('hello')
     }
 
     close() {
