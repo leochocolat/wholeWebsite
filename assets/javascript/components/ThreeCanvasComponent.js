@@ -4,11 +4,7 @@ import bindAll from '../utils/bindAll';
 
 import Worker from '../workers/UIScene.worker.js';
 
-// import ThreeBackgroundPlane from '../modules/threeModules/ThreeBackgroundPlane';
-// import ThreeLightHouse from '../modules/threeModules/ThreeLightHouse';
-// import ThreeLights from '../modules/threeModules/ThreeLights';
-// import ThreeFog from '../modules/threeModules/ThreeFog';
-// import ThreeParticleSystem from '../modules/threeModules/ThreeParticleSystem';
+import ThreeScene from '../modules/threeModules/ThreeScene';
 
 class ThreeCanvasComponent {
     constructor(options) {
@@ -90,19 +86,14 @@ class ThreeCanvasComponent {
     }
 
     _setupCanvasScene() {
+        this._threeScene = new ThreeScene(this.el, window.innerWidth, window.innerHeight, window.devicePixelRatio);
         //todo
     }
 
-    _updateDeltaTime() {
-        this._dateNow = Date.now();
-        this._time = this._dateNow - this._startTime;
-        this._deltaTime = this._dateNow - this._lastTime;
-        this._lastTime = this._dateNow;
-        this._fps = Math.round(1000 / this._deltaTime);
-    }
-
     _update() {
-        this._updateDeltaTime();
+        if (this._isOffscreen) return;
+
+        this._threeScene.update();
     }
 
     _sendWoker(object) {
