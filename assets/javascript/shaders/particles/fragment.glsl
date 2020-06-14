@@ -29,5 +29,6 @@ void main() {
 	color = colB;
 	color.a = t;
 
-	gl_FragColor = color;
+	// gl_FragColor = color;
+	gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
 }

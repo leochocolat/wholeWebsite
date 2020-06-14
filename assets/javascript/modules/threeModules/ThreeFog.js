@@ -31,7 +31,7 @@ class ThreeFog {
     }
 
     _transitionIn() {
-        TweenLite.to(this._fog, 1, { density: 0.0020 });
+        // TweenLite.to(this._fog, 1, { density: 0.0020 });
         TweenLite.to(this._fog, 1, { density: 0.0028 });
     }
 

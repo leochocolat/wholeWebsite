@@ -6,10 +6,10 @@ import vertex from '../shaders/particles/vertex.glsl';
 
 const PESPECTIVE = 800;
 let width, height, dpr;
-let canvas, renderer, scene, camera;
+let canvas, renderer, scene, camera, container;
 let fov;
 let imageSize, imageData, texture;
-let cube;
+let mesh, cube, fog;
 
 const handlers = {
     setup,
@@ -44,7 +44,8 @@ function setupScene(e) {
     
     renderer = new THREE.WebGLRenderer({
         canvas: canvas,
-        alpha: true
+        alpha: true,
+        antialias: true
     });
 
     // renderer.setClearColor(0x000000);
@@ -54,12 +55,16 @@ function setupScene(e) {
     camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
     camera.position.z = 300;
 
+    container = new THREE.Object3D();
+
+    scene.add(container);
+
     // cube test
     // let cubeGeo = new THREE.BoxGeometry(100, 100, 100);
-    // let cubeMaterial = new THREE.MeshNormalMaterial();
+    // let cubeMaterial = new THREE.MeshStandardMaterial(0xffffff);
     // cube = new THREE.Mesh(cubeGeo, cubeMaterial);
 
-    // scene.add(cube);
+    // container.add(cube);
 }
 
 function resize(e) {
@@ -153,17 +158,25 @@ function setupParticules() {
     geometry.setAttribute('offset', new THREE.InstancedBufferAttribute(offsets, 3, false));
     geometry.setAttribute('angle', new THREE.InstancedBufferAttribute(angles, 1, false));
 
-    let mesh = new THREE.Mesh(geometry, material);
-    console.log(mesh);
-    scene.add(mesh);
+    mesh = new THREE.Mesh(geometry, material);
+    
+    container.add(mesh);
 }
 
 function update() {
-    // cube.rotation.z += 0.01;
-    // cube.rotation.x += 0.01;
+    if (cube) {
+        cube.rotation.z += 0.01;
+        cube.rotation.x += 0.01;
+    } 
 
-    // camera.position.z += 1;
+    // camera.position.z += -1;
+    // camera.rotation.y += 0.1;
+    // camera.rotation.x += 0.1;
 
+    if (mesh) {
+        mesh.material.uniforms.uTime.value += 1;
+    }
+    
     renderer.render(scene, camera);
 
     requestAnimationFrame(update);
