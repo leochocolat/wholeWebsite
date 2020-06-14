@@ -1,9 +1,7 @@
 <template>
   <div class="page-home js-scroll-container">
     <div class="js-scroll-content">
-      <section></section>
-      <section></section>
-      <section></section>
+      <SectionExample v-for="(item, index) in 5" :key="index" :id="index" />
     </div>
   </div>
 </template>
@@ -14,10 +12,14 @@ const client = createClient();
 
 import page from '~/assets/javascript/mixins/page';
 
+import SectionExample from '~/components/SectionExample';
+
 export default {
   data() { return { namespace: 'home' } },
   mixins: [page],
-  components: {},
+  components: {
+    SectionExample
+  },
   asyncData({ env }) {
     return Promise.all([
       client.getEntries({

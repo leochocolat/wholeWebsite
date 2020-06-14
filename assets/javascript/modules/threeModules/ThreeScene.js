@@ -3,8 +3,6 @@ import ThreeLights from './ThreeLights';
 import ThreeFog from './ThreeFog';
 import ThreeBackgroundPlane from './ThreeBackgroundPlane';
 
-
-
 const PESPECTIVE = 800;
 
 class ThreeScene {

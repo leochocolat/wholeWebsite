@@ -2,18 +2,21 @@
   <div>
     <ThreeScene />
     <nuxt/>
-    <Loader />
+    <StartScreen />
+    <Grid />
   </div>
 </template>
 
 <script>
 import ThreeScene from '~/components/ThreeScene';
-import Loader from '~/components/Loader';
+import StartScreen from '~/components/StartScreen';
+import Grid from '~/components/Grid';
 
 export default {
   components: {
     ThreeScene,
-    Loader
+    StartScreen,
+    Grid
   }
 }
 </script>

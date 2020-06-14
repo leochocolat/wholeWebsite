@@ -3,6 +3,8 @@ import vertex from '../../shaders/vertex.glsl';
 import Emitter from '../../events/Emitter';
 import bindAll from '../../utils/bindAll';
 
+import { TweenLite, Power3 } from 'gsap';
+
 const POS_Z = -200;
 
 class ThreeBackgroundPlane {
@@ -69,17 +71,18 @@ class ThreeBackgroundPlane {
     _bindAll() {
         bindAll(
             this,
-            '_scrollHandler'
+            '_scrollHandler',
+            '_startHandler'
         );
     }
 
     _setupEventListeners() {
-        Emitter.on('EXPERIENCE:START', this._startHandler);
+        Emitter.on('START:EXPERIENCE', this._startHandler);
         Emitter.on('SCROLL', this._scrollHandler);
     }
 
     _startHandler() {
-        
+        TweenLite.to(this._uniforms.u_secondary_position, 1, { value: 0.5, ease: Power3.easeInOut });
     }
 
     _scrollHandler(e) {

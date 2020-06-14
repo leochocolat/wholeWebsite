@@ -1,0 +1,19 @@
+.section-example {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+
+    color: $white;
+    font-size: 80px;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+
+    &.isInView {
+        opacity: 1;
+    }
+}

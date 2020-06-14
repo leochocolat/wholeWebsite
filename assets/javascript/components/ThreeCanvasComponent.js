@@ -105,7 +105,8 @@ class ThreeCanvasComponent {
             this,
             '_tickHandler',
             '_scrollHandler',
-            '_resizeHandler'
+            '_resizeHandler',
+            '_startExperienceHandler'
         );
     }
 
@@ -114,6 +115,7 @@ class ThreeCanvasComponent {
 
         Emitter.on('SCROLL', this._scrollHandler);
         Emitter.on('RESIZE:END', this._resizeHandler);
+        Emitter.on('START:EXPERIENCE', this._startExperienceHandler);
     }
 
     _removeEventListeners() {
@@ -125,6 +127,17 @@ class ThreeCanvasComponent {
 
     _tickHandler() {
         this._update();
+    }
+
+    _startExperienceHandler() {
+        if (this._isOffscreen) {
+            this._worker.postMessage({
+                name: 'start',
+                event: {}
+            }, []);
+        } else {
+            
+        }
     }
 
     _scrollHandler(e) {

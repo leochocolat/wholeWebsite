@@ -1,0 +1,132 @@
+.start-screen {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background-color: transparentize($color: $blue, $amount: 1);
+    transition: background-color 1s $Power1InOut;
+
+    pointer-events: none;
+
+    &.is-active {
+        pointer-events: all;
+        background-color: transparentize($color: $blue, $amount: 0.35);
+    }
+}
+
+.start-screen__canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.start-screen__container {
+    position: relative;
+
+    height: 100vh;
+}
+
+.start-screen__start-button-container {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    right: 0;
+    bottom: 60px;
+}
+
+.start-screen__start-button {
+    position: relative;
+
+    width: 60px;
+    height: 60px;
+
+    cursor: pointer;
+}
+
+.start-screen__start-button-label {
+    margin-right: 30px;
+
+    font-size: rem(15px);
+    font-weight: 100;
+
+    cursor: pointer;
+}
+
+.start-screen__start-button-arrow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    margin: auto;
+
+    width: 13px;
+    height: 13px;
+    
+    transform: rotate(90deg);
+}
+
+.start-screen__start-button-circle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    margin: auto;
+
+    width: 60px;
+    height: 60px;
+
+    overflow: visible;
+
+    circle {
+        fill: transparent;
+        stroke: $white;
+        opacity: 0.5;
+    }
+
+    &--loading {
+        circle {
+            fill: transparent;
+            stroke: $white;
+            opacity: 1;
+            stroke-width: 2;
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220 !important;
+      
+            transform: rotate(180deg);
+            transform-origin: center;
+            transition: stroke-dashoffset 1.3s cubic-bezier(.74,0,.24,.99), transform 1.3s cubic-bezier(.74,0,.24,.99); 
+        }
+
+        //to remove
+        &:hover {
+            circle {
+                // transform: rotate(270deg);
+                stroke-dashoffset: 0 !important;
+            }
+        }
+    }
+}
+
+
+//TO REMOVE
+.start-screen__progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    color: $white;
+
+    font-size: rem(100px);
+    font-weight: 400;
+
+    //to remove
+    display: none;
+}

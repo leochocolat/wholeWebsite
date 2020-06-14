@@ -10,6 +10,7 @@ const handlers = {
     'resize': resizeHandler,
     'scroll': scrollHandler,
     'close': close,
+    'start': startExperience,
 };
 
 if (typeof self === 'object') {
@@ -48,6 +49,10 @@ function setupCanvas(e) {
 
 function setupThreeScene() {
     threeScene = new ThreeScene(canvas, width, height, devicePixelRatio);
+}
+
+function startExperience(e) {
+    Emitter.emit('START:EXPERIENCE', e.event);
 }
 
 function update() {

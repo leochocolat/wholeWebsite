@@ -1,0 +1,73 @@
+.grid {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    margin: auto;
+
+    height: 100vh;
+
+    display: none;
+    z-index: 10000;
+
+    &.enable {
+        display: block;
+    }
+}
+
+.grid-regular {
+    width: 100%;
+
+    .regular {
+        position: absolute;
+        top: 0;
+
+        height: 100%;
+        width: 0px;
+
+        font-size: 0px;
+
+        border-left: solid 1px red;
+
+        @for $i from 0 to 25 {
+            &:nth-child(#{$i + 1}) {
+                left: size($i, 24);
+            }
+        }
+    }
+}
+
+.grid-narrow {
+    display: none;
+    
+    width: 100%;
+
+    .narrow {
+        position: absolute;
+        top: 0;
+
+        height: 100%;
+        width: 0px;
+
+        font-size: 0px;
+
+        border-left: solid 1px green;
+
+        @for $i from 0 to 9 {
+            &:nth-child(#{$i + 1}) {
+                left: size($i, 8);
+            }
+        }
+    }
+}
+
+@include mq-extra-narrow {
+    .grid-narrow {
+        display: block;
+    }
+
+    .grid-regular {
+        display: none;
+    }
+}

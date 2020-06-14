@@ -17,7 +17,8 @@
  * Partials
  */
  @import './partials/three-scene';
- @import './partials/loader';
+ @import './partials/start-screen';
+ @import './partials/grid';
 
 /**
  * Headers
@@ -26,6 +27,7 @@
 /**
  * Sections
  */
+@import './sections/section-example';
 
 /**
  * Pages

@@ -36,11 +36,20 @@ class ThreeFog {
     }
 
     _bindAll() {
-        bindAll(this, '_transitionIn');
+        bindAll(
+            this,
+            '_transitionIn',
+            '_startHandler'
+        );
     }
 
     _setupEventListeners() {
         Emitter.on('MODEL:LOADED', this._transitionIn);
+        Emitter.on('START:EXPERIENCE', this._startHandler);
+    }
+
+    _startHandler() {
+        TweenLite.to(this._fog, 1, { density: 0.0023 });
     }
 }
 

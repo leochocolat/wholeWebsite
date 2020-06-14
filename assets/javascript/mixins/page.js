@@ -1,6 +1,7 @@
 import ScrollManager from '../managers/ScrollManager';
 import ScrollModule from '../modules/ScrollModule';
 import { mapGetters } from 'vuex';
+import Emitter from '../events/Emitter';
 
 export default {
     mounted() {
@@ -8,6 +9,7 @@ export default {
         this._setupSmoothScroll();
         this._setupSession();
         this._setupCurrentPage();
+        this._setupEventListeners();
     },
     methods: {
         _setup() {
@@ -19,9 +21,7 @@ export default {
                 content: this.$el.querySelector('.js-scroll-content'),
                 smooth: true,
                 smoothValue: 0.1
-            });
-
-            this._scrollModule.start();
+            });            
         },
         _setupSession() {
             if (this.session) return;
@@ -31,6 +31,12 @@ export default {
             this.$store.dispatch('page/setCurrent', this.namespace);
             document.querySelector('html').classList.add(`${this.namespace}`);
             document.body.classList.add(`${this.namespace}`);
+        },
+        _setupEventListeners() {
+            Emitter.on('START:EXPERIENCE', this._startHandler);
+        },
+        _startHandler() {
+            this._scrollModule.start();
         }
     },
     computed: {
