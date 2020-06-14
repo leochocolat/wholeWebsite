@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import Emitter from '../events/Emitter';
 
 import fragment from '../shaders/particles/fragment.glsl';
 import vertex from '../shaders/particles/vertex.glsl';

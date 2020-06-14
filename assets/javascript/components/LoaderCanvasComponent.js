@@ -3,7 +3,6 @@ import bindAll from '../utils/bindAll';
 
 import Worker from '../workers/offscreenCanvas.worker.js';
 
-
 class LoaderCanvasComponent {
     constructor(options) {
         this.el = options.el;
@@ -108,6 +107,10 @@ class LoaderCanvasComponent {
     _resizeHandler(e) {
         this._resize(e.viewportWidth, e.viewportHeight, e.devicePixelRatio);
     }
+
+    _sendWoker(object) {
+        return JSON.parse(JSON.stringify(object));
+    };
 
 }
 

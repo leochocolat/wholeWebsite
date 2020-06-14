@@ -4,19 +4,20 @@
 </template>
 
 <script>
-import ThreeSceneComponent from '~/assets/javascript/components/ThreeSceneComponent';
+// import ThreeSceneComponent from '~/assets/javascript/components/ThreeSceneComponent';
+import ThreeCanvasComponent from '~/assets/javascript/components/ThreeCanvasComponent';
 
 export default {
     methods: {
         setup() {
-            this.threeScene = new ThreeSceneComponent({ el: this.$el });
+            this.threeCanvas = new ThreeCanvasComponent({ el: this.$el });
         }
     },
     mounted() {
         this.setup();
     },
     beforeDestroy() {
-        this.threeScene.close();
+        this.threeCanvas.close();
     }
 }
 </script>

@@ -7,6 +7,9 @@
     height: 100vh;
 
     background-color: transparentize($color: $blue, $amount: 0.35);
+
+    //to remove
+    display: none;
 }
 
 .loader__canvas {
