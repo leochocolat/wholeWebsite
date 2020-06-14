@@ -134,7 +134,7 @@ class ThreeCanvasComponent {
                 event: this._sendWoker(e)
             }, []);
         } else {
-
+            
         }
     }
 

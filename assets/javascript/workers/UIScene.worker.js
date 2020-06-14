@@ -1,4 +1,5 @@
 import ThreeScene from '../modules/threeModules/ThreeScene';
+import Emitter from '../events/Emitter';
 
 let canvas;
 let width, height, devicePixelRatio;
@@ -68,5 +69,5 @@ function resizeHandler(e) {
 }
 
 function scrollHandler(e) {
-    const event = e.event;
+    Emitter.emit('SCROLL', e.event);
 }
