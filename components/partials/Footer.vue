@@ -13,13 +13,13 @@
                     </div>
                     <ul class="footer__team-list">
                         <li class="footer__team-list-item">
-                            <a href="https://leomouraire.com" target="_blank" noopener class="footer__team-link">Léo Mouraire</a>
+                            <a href="http://serge-bocancea.fr" target="_blank" noopener class="footer__team-link">Serge Bocancea</a>
                         </li>
                         <li class="footer__team-list-item">
-                            <a href="https://leomouraire.com" target="_blank" noopener class="footer__team-link">Léo Mouraire</a>
+                            <a href="http://serge-bocancea.fr" target="_blank" noopener class="footer__team-link">Serge Bocancea</a>
                         </li>
                         <li class="footer__team-list-item">
-                            <a href="https://leomouraire.com" target="_blank" noopener class="footer__team-link">Léo Mouraire</a>
+                            <a href="http://serge-bocancea.fr" target="_blank" noopener class="footer__team-link">Serge Bocancea</a>
                         </li>
                     </ul>
                 </div>
@@ -29,13 +29,13 @@
                     </div>
                     <ul class="footer__team-list">
                         <li class="footer__team-list-item">
-                            <a href="https://leomouraire.com" target="_blank" noopener class="footer__team-link">Léo Mouraire</a>
+                            <a href="http://serge-bocancea.fr" target="_blank" noopener class="footer__team-link">Serge Bocancea</a>
                         </li>
                         <li class="footer__team-list-item">
-                            <a href="https://leomouraire.com" target="_blank" noopener class="footer__team-link">Léo Mouraire</a>
+                            <a href="http://serge-bocancea.fr" target="_blank" noopener class="footer__team-link">Serge Bocancea</a>
                         </li>
                         <li class="footer__team-list-item">
-                            <a href="https://leomouraire.com" target="_blank" noopener class="footer__team-link">Léo Mouraire</a>
+                            <a href="http://serge-bocancea.fr" target="_blank" noopener class="footer__team-link">Serge Bocancea</a>
                         </li>
                     </ul>
                 </div>

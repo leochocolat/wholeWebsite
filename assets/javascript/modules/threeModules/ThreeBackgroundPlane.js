@@ -22,6 +22,7 @@ class ThreeBackgroundPlane {
     }
 
     update(time, deltaTime, fps) {
+        if (!this._uniforms) return;
         this._uniforms.u_time.value = time;
         this._uniforms.u_delta_time.value = deltaTime;
         this._uniforms.u_fps.value = fps;
@@ -31,23 +32,29 @@ class ThreeBackgroundPlane {
         this._width = width;
         this._height = height;
 
+        if (!this._mesh) return;
         this._mesh.scale.set(this._width * (this._width/POS_Z), this._height * (this._height/POS_Z), 1);
         this._uniforms.u_resolution.value.set(this._width, this._height, 1);
     }
 
     _setup() {
-        this._setupPlane();
-        this._setupGradientTimeline();
-        this._setupEventListeners();
+        let loader = new THREE.ImageBitmapLoader();
+        loader.load('../images/noise.png', imageBitmap => {
+            let texture = new THREE.CanvasTexture(imageBitmap);
+            this._setupPlane(texture);
+            this._setupGradientTimeline();
+            this._setupEventListeners();
+        });
     }
 
-    _setupPlane() {
+    _setupPlane(noiseTexture) {
         this._uniforms = {
             u_resolution: { value: new THREE.Vector3(this._width, this._height, 0) },
             u_time: { value: 0 },
             u_delta_time: { value: 17 },
             u_fps: { value: 60 },
             //colors
+            u_noise_texture: { value: noiseTexture, type: 't' },
             u_primary_color: { value: new THREE.Color(0xD493B8), type : 'c' },
             u_primary_position: { value: 0.0 },
             u_secondary_color: { value: new THREE.Color(0x393C60), type : 'c' },
@@ -96,7 +103,7 @@ class ThreeBackgroundPlane {
     }
 
     _startHandler() {
-        TweenLite.to(this._uniforms.u_secondary_position, 1, { value: 0.5, ease: Power3.easeInOut });
+        TweenLite.to(this._uniforms.u_secondary_position, 1, { value: 0.6, ease: Power3.easeInOut });
     }
 
     _scrollHandler(e) {

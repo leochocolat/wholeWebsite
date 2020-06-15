@@ -29,7 +29,7 @@ class ThreeParticleSystem {
     _setup() {
         let loader = new THREE.ImageBitmapLoader();
 
-        loader.load('images/particle.png', imageBitmap => {
+        loader.load('../images/particle.png', imageBitmap => {
             const texture = new THREE.CanvasTexture(imageBitmap);
             this._setupParticles(texture);
             this._setupEventListeners();
