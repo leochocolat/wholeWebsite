@@ -5,6 +5,7 @@ import bindAll from '../utils/bindAll';
 import Worker from '../workers/UIScene.worker.js';
 
 import ThreeScene from '../modules/threeModules/ThreeScene';
+import ScrollTriggerManager from '../managers/ScrollTriggerManager'; 
 
 class ThreeCanvasComponent {
     constructor(options) {
@@ -106,7 +107,8 @@ class ThreeCanvasComponent {
             '_tickHandler',
             '_scrollHandler',
             '_resizeHandler',
-            '_startExperienceHandler'
+            '_startExperienceHandler',
+            '_scrollCallHandler'
         );
     }
 
@@ -116,6 +118,8 @@ class ThreeCanvasComponent {
         Emitter.on('SCROLL', this._scrollHandler);
         Emitter.on('RESIZE:END', this._resizeHandler);
         Emitter.on('START:EXPERIENCE', this._startExperienceHandler);
+
+        ScrollTriggerManager.addEventListener('call', this._scrollCallHandler);
 
         if (this._isOffscreen) {
             this._worker.addEventListener('message', (e) => {
@@ -131,6 +135,22 @@ class ThreeCanvasComponent {
 
         Emitter.removeListener('SCROLL', this._scrollHandler);
         Emitter.removeListener('RESIZE:END', this._resizeHandler);
+    }
+
+    _scrollCallHandler(e) {
+        if (e.name = 'sea') {
+            const state = e.state.toUpperCase();
+            console.log(state);
+            
+            if (this._isOffscreen) {
+                this._worker.postMessage({
+                    name: 'call',
+                    event: `SEA:${state}`
+                }, []);
+            } else {
+                Emitter.emit(`SEA:${state}`, e);
+            }
+        }
     }
 
     _tickHandler() {

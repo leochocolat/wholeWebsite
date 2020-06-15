@@ -2,6 +2,7 @@ import ThreeLightHouse from './ThreeLightHouse';
 import ThreeLights from './ThreeLights';
 import ThreeFog from './ThreeFog';
 import ThreeBackgroundPlane from './ThreeBackgroundPlane';
+import ThreeParticleSystem from './ThreeParticleSystem';
 
 const PESPECTIVE = 800;
 
@@ -66,7 +67,8 @@ class ThreeScene {
     _setupScene() {
         this._renderer = new THREE.WebGLRenderer({
             canvas: this._canvas,
-            alpha: true
+            alpha: true,
+            antialias: false
         });
 
         this._renderer.setClearColor(0x393C60);
@@ -89,6 +91,7 @@ class ThreeScene {
         this._sceneEntities.fog = new ThreeFog(this._scene);
         this._sceneEntities.lighthouse = new ThreeLightHouse(this._scene, this._width, this._height);
         this._sceneEntities.backgroundPlane = new ThreeBackgroundPlane(this._scene, this._width, this._height);
+        this._sceneEntities.particules = new ThreeParticleSystem(this._scene, this._width, this._height);
     }
 
     _updateDeltaTime() {

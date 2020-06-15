@@ -1,7 +1,8 @@
 <template>
   <div class="page-home js-scroll-container">
     <div class="js-scroll-content">
-      <SectionExample v-for="(item, index) in 5" :key="index" :id="index" />
+      <SectionExample v-for="(item, index) in 2" :key="index" :id="index" />
+      <SectionExample data-scroll data-scroll-call="sea" data-scroll-repeat="true" :id="99" />
     </div>
   </div>
 </template>

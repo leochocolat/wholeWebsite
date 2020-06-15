@@ -41,7 +41,7 @@ class ThreeLightHouse {
     _loadModel() {
         Emitter.emit('MODEL:STARTLOADING', {});
         
-        new GLTFLoader().load('/models/lighthouse.gltf', this._modelLoadedHandler);
+        new GLTFLoader().load('/models/lighthouse-light.gltf', this._modelLoadedHandler);
     }
 
     _setupLightHouse() {
@@ -53,6 +53,19 @@ class ThreeLightHouse {
         this._mesh.position.x = this._scrollPosittion.y * 1.5 + this._width;
         this._mesh.position.y = this._scrollPosittion.y - 200;
         this._mesh.position.z = this._scrollDelta * 0.05 + 200;
+
+        this._mesh.traverse(child => {
+            if (child.name === 'physical_light') {
+                child.material.emissive = new THREE.Color(0xffff00);
+                child.visible = false;
+                child.material.emissiveIntensity = 100;
+
+                this._mesh.updateMatrixWorld();
+
+                let vector = new THREE.Vector3();
+                let position = child.getWorldPosition(vector); 
+            }
+        });
 
         this._scene.add(this._mesh);
     }

@@ -11,6 +11,7 @@ const handlers = {
     'scroll': scrollHandler,
     'close': close,
     'start': startExperience,
+    'call': scrollCallHandler,
 };
 
 if (typeof self === 'object') {
@@ -76,6 +77,10 @@ function resizeHandler(e) {
     canvas.height = height;
     
     threeScene.resize(width, height, devicePixelRatio);
+}
+
+function scrollCallHandler(e) {
+    Emitter.emit(e.event, {});
 }
 
 function scrollHandler(e) {
