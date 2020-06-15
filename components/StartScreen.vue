@@ -1,5 +1,5 @@
 <template>
-    <div class="start-screen is-active" >
+    <div class="start-screen is-active" @click="startDevExperience">
         <canvas class="start-screen__canvas js-offscreen-canvas"></canvas>
 
         <div class="container start-screen__container">
@@ -7,8 +7,8 @@
                 <span class="start-screen__progress-value js-progress-value">0</span>%
             </div>
 
-            <div class="start-screen__start-button-container">
-                <div class="start-screen__start-button-label-container">
+            <div class="start-screen__start-button-container js-button-container">
+                <div class="start-screen__start-button-label-container" @click="startExperience">
                     <span class="start-screen__start-button-label js-start-label">
                         Explore
                     </span>
@@ -16,7 +16,7 @@
                         Loading
                     </span>
                 </div>
-                <button class="start-screen__start-button" @click="startExperience">
+                <button class="start-screen__start-button js-start-button" @click="startExperience">
                     <Arrow class="start-screen__start-button-arrow js-start-arrow" />
                     <svg class="start-screen__start-button-circle start-screen__start-button-circle--placeholder js-circle-placeholder" width="80" height="80">
                         <circle cx="30" cy="30" r="30" />
@@ -48,7 +48,15 @@ export default {
         setup() {
             this._loaderComponent = new LoaderComponent({ el: this.$el });
         },
-        startExperience() {
+        startExperience(e) {
+            Emitter.emit('START:EXPERIENCE', {});
+            e.currentTarget.classList.add('is-active');
+            this.$el.classList.remove('is-active');
+        },
+        //for dev only
+        startDevExperience(e) {
+            if (process.env.NODE_ENV != 'development') return;
+            
             Emitter.emit('START:EXPERIENCE', {});
             this.$el.classList.remove('is-active');
         }

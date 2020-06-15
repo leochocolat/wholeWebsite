@@ -53,6 +53,7 @@ class ThreeBackgroundPlane {
             u_secondary_color: { value: new THREE.Color(0x393C60), type : 'c' },
             u_secondary_position: { value: 0.0 },
             u_third_color: { value: new THREE.Color(0x111737), type : 'c' },
+            u_third_position: { value: 1.0 },
         }
 
         let geometry = new THREE.PlaneGeometry(1, 1, 1);
@@ -60,6 +61,7 @@ class ThreeBackgroundPlane {
             uniforms: this._uniforms,
             fragmentShader: fragment,
             vertexShader: vertex,
+            fog: false
         });
 
         this._mesh = new THREE.Mesh(geometry, material);
@@ -73,8 +75,11 @@ class ThreeBackgroundPlane {
         this._timelineProgress = 0;
         this._timeline = new TimelineLite({ paused: true });
         this._timeline.to(this._uniforms.u_secondary_position, 1, { value: 0.0, ease: Power0.easeNone });
-        this._timeline.set(this._uniforms.u_primary_color, { value: this._uniforms.u_third_color.value, ease: Power0.easeNone });
-        this._timeline.to(this._uniforms.u_secondary_position, 1, { value: 1.0, ease: Power0.easeNone });
+        this._timeline.set(this._uniforms.u_primary_color, { value: this._uniforms.u_secondary_color.value, ease: Power0.easeNone });
+        this._timeline.set(this._uniforms.u_secondary_color, { value: this._uniforms.u_third_color.value, ease: Power0.easeNone });
+        this._timeline.set(this._uniforms.u_primary_position, { value: 0.0 });
+        this._timeline.set(this._uniforms.u_secondary_position, { value: 4.0 });
+        this._timeline.to(this._uniforms.u_secondary_position, 2, { value: 0.0, ease: Power0.easeNone });
     }
 
     _bindAll() {
@@ -97,10 +102,11 @@ class ThreeBackgroundPlane {
     _scrollHandler(e) {
         const delta = e.delta;
 
-        this._timelineProgress += 0.001 * -delta;
+        this._timelineProgress += 0.0005 * -delta;
 
-        if (this._timelineProgress.toFixed(2) <= 0 || this._timelineProgress.toFixed(2) >= 1) return;
+        if (this._timelineProgress.toFixed(2) < 0 || this._timelineProgress.toFixed(2) > 1) return;
         this._timeline.progress(this._timelineProgress.toFixed(2));
+        // console.log(this._timelineProgress.toFixed(2));
     }
 }
 

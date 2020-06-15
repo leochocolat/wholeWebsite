@@ -38,6 +38,8 @@
     position: absolute;
     right: 0;
     bottom: 60px;
+
+    pointer-events: none;
 }
 
 .start-screen__start-button {
@@ -48,7 +50,7 @@
 
     cursor: pointer;
 
-    &:hover {
+    &:hover, &.is-active {
         .start-screen__start-button-circle {
             transform: scale(1.2);
         }
@@ -70,6 +72,8 @@
     text-align: right;
 
     overflow: hidden;
+
+    cursor: pointer;
 }
 
 .start-screen__start-button-label {

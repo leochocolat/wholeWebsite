@@ -71,7 +71,7 @@ class ThreeScene {
             antialias: false
         });
 
-        this._renderer.setClearColor(0x393C60);
+        this._renderer.setClearColor(0x111737);
 
         this._renderer.setSize(this._width, this._height, false);
         // this._renderer.setPixelRatio(this._devicePixelRatio);

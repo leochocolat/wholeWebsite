@@ -18,6 +18,7 @@ class LoaderComponent {
             startLabel: this.el.querySelector('.js-start-label'),
             loadingLabel: this.el.querySelector('.js-loading-label'),
             startArrow: this.el.querySelector('.js-start-arrow'),
+            startButtonContainer: this.el.querySelector('.js-button-container'),
         }
 
         this.components = {
@@ -47,8 +48,6 @@ class LoaderComponent {
             type: 'chars',
             linesClass: 'char letter--++',
         })
-
-        console.log(this._splitedLoadingLabel);
     }
 
     _setupCircleAnimation() {
@@ -76,8 +75,6 @@ class LoaderComponent {
     _finishLoading() {
         if (!this._startAnimationCompleted || !this._loadedCompleted) return;
 
-        console.log('finish loading');
-
         let timeline = new TimelineLite({ onComplete: this._finishAnimationComplete });
 
         timeline.to(this._loader, 2, { value: 1,
@@ -88,8 +85,9 @@ class LoaderComponent {
     }
 
     _transitionOut() {
-        console.log('transition out')
         let timeline = new TimelineLite();
+
+        this.ui.startButtonContainer.style.pointerEvents = 'all';
 
         timeline.staggerTo(this._splitedLoadingLabel.chars, 1.5, { y: '-200%', ease: Power3.easeOut }, 0.05, 0);
         timeline.staggerTo(this._splitedStartLabel.chars, 1.5, { y: '-100%', ease: Power3.easeOut }, 0.05, 0);
