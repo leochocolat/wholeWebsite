@@ -29,6 +29,7 @@ if (typeof self === 'object') {
 function setup(e) {
     setupCanvas(e);
     setupThreeScene(e);
+    setupEventListeners();
 
     update();
 }
@@ -61,6 +62,10 @@ function update() {
     requestAnimationFrame(update);
 }
 
+function setupEventListeners() {
+    Emitter.on('MODEL:LOADED', modelLoadedHandler);
+}
+
 //handlers
 function resizeHandler(e) {
     width = e.width;
@@ -75,4 +80,10 @@ function resizeHandler(e) {
 
 function scrollHandler(e) {
     Emitter.emit('SCROLL', e.event);
+}
+
+function modelLoadedHandler() {
+    self.postMessage({
+        name: 'MODEL:LOADED'
+    }, []);
 }

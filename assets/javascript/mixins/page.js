@@ -13,7 +13,7 @@ export default {
     },
     methods: {
         _setup() {
-            ScrollManager.enable();
+            // ScrollManager.enable();
         },
         _setupSmoothScroll() {
             this._scrollModule = new ScrollModule({
@@ -37,6 +37,7 @@ export default {
         },
         _startHandler() {
             this._scrollModule.start();
+            ScrollManager.enable();
         }
     },
     computed: {

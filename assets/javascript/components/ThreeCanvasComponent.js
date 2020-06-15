@@ -13,8 +13,6 @@ class ThreeCanvasComponent {
 
         this._bindAll();
         this._setup();
-
-        console.log('hello')
     }
 
     close() {
@@ -118,6 +116,14 @@ class ThreeCanvasComponent {
         Emitter.on('SCROLL', this._scrollHandler);
         Emitter.on('RESIZE:END', this._resizeHandler);
         Emitter.on('START:EXPERIENCE', this._startExperienceHandler);
+
+        if (this._isOffscreen) {
+            this._worker.addEventListener('message', (e) => {
+                if (e.data.name === 'MODEL:LOADED') {
+                    Emitter.emit('MODEL:LOADED', {});
+                }
+            })
+        }
     }
 
     _removeEventListeners() {

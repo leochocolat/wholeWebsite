@@ -1,5 +1,5 @@
 <template>
-    <div class="start-screen is-active">
+    <div class="start-screen is-active" @click="startExperience">
         <canvas class="start-screen__canvas js-offscreen-canvas"></canvas>
 
         <div class="container start-screen__container">
@@ -7,7 +7,7 @@
                 <span class="start-screen__progress-value js-progress-value">0</span>%
             </div>
 
-            <div class="start-screen__start-button-container">
+            <!-- <div class="start-screen__start-button-container">
                 <span class="start-screen__start-button-label">
                     Explore
                 </span>
@@ -20,7 +20,7 @@
                         <circle cx="30" cy="30" r="30" />
                     </svg>
                 </button>
-            </div>
+            </div> -->
         </div>
 
 
