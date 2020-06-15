@@ -38,23 +38,18 @@ class ThreeBackgroundPlane {
     }
 
     _setup() {
-        let loader = new THREE.ImageBitmapLoader();
-        loader.load('../images/noise.png', imageBitmap => {
-            let texture = new THREE.CanvasTexture(imageBitmap);
-            this._setupPlane(texture);
-            this._setupGradientTimeline();
-            this._setupEventListeners();
-        });
+        this._setupPlane();
+        this._setupGradientTimeline();
+        this._setupEventListeners();
     }
 
-    _setupPlane(noiseTexture) {
+    _setupPlane() {
         this._uniforms = {
             u_resolution: { value: new THREE.Vector3(this._width, this._height, 0) },
             u_time: { value: 0 },
             u_delta_time: { value: 17 },
             u_fps: { value: 60 },
             //colors
-            u_noise_texture: { value: noiseTexture, type: 't' },
             u_primary_color: { value: new THREE.Color(0xD493B8), type : 'c' },
             u_primary_position: { value: 0.0 },
             u_secondary_color: { value: new THREE.Color(0x393C60), type : 'c' },
