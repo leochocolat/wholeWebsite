@@ -140,7 +140,6 @@ class ThreeCanvasComponent {
     _scrollCallHandler(e) {
         if (e.name = 'sea') {
             const state = e.state.toUpperCase();
-            console.log(state);
             
             if (this._isOffscreen) {
                 this._worker.postMessage({

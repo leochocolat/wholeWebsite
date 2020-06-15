@@ -24,6 +24,12 @@
 @include font-face('Exo', 500, 'Exo-Medium');
 @include font-face('Exo', 600, 'Exo-Bold');
 
+
+@include font-face('Faune', 100, 'Faune-DisplayThin');
+@include font-face('Faune', 400, 'Faune-TextRegular');
+@include font-face('Faune', 500, 'Faune-TextBold');
+@include font-face('Faune', 900, 'Faune-DisplayBlack');
+
 $base-font-size: 16px;
 
 @function rem($px, $base: $base-font-size) {

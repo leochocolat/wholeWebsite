@@ -1,0 +1,51 @@
+.footer {
+    position: relative;
+}
+
+.footer__container {
+    padding-top: 46px;
+    padding-bottom: 46px;
+}
+
+.footer__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding-bottom: 80px;
+}
+
+.footer__col {
+    width: 25%;
+}
+
+.footer__project-name {
+    font-family: $faune;
+    font-size: rem(25px);
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.footer__team-title {
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.footer__team-list-item {
+    font-weight: 100;
+    line-height: rem(30px);
+}
+
+.footer__logo-gobelins-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    position: relative;
+    width: 100%;
+}
+
+.footer__logo-gobelins {
+    width: 50%;
+    height: auto;
+}

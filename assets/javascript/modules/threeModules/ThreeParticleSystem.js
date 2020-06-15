@@ -42,8 +42,8 @@ class ThreeParticleSystem {
 
         let material = new THREE.PointsMaterial({
             color: 0xFFFFFF,
-            size: 20,
-            // map: texture,
+            size: 50,
+            map: texture,
             blending: THREE.AdditiveBlending,
             transparent: true,
             depthTest: false,
@@ -53,7 +53,8 @@ class ThreeParticleSystem {
         for (let i = 0; i < this._amount; i++) {
             const x = Math.random() * this._width * 2 - this._width;
             const y = Math.random() * this._height * 2 - this._height;
-            const z = Math.random() * -500;
+            // const z = Math.random() * -500;
+            const z = 0;
 
             vertices.push(x, y, z);
         }
