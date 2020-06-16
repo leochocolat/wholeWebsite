@@ -54,6 +54,8 @@ export default {
 
             this.$el.querySelector('.js-button').classList.add('is-active');
             // Emitter.removeListener('SNAP', this.startExperience);
+
+            this.transitionOut();
         },
         //for dev only
         startDevExperience(e) {
