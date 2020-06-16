@@ -27,22 +27,55 @@ class LoaderComponent {
         this._setupEventListeners();
         this._startProgress();
     }
-    
+
+    _setupSplitText() {
+        this._splitedLoadingLabel = new SplitText(this.ui.loadingLabel, {
+            type: 'chars',
+            linesClass: 'char char--++',
+        });
+
+        this._splitedStartLabel = new SplitText(this.ui.startLabel, {
+            type: 'chars',
+            linesClass: 'char letter--++',
+        });
+    }
+
+    _setupCircleAnimation() {
+        this._timeline = new TimelineLite({ paused: true });
+
+        this._timeline.fromTo(this.ui.circle, 1, { strokeDashoffset: 220 }, { strokeDashoffset: 0, ease: Power0.easeNone });
+    }
+
     _startProgress() {
-        TweenLite.to(this._loader, 2, { value: 90,
+        let timeline = new TimelineLite({
+            onComplete: () => {
+                this._startAnimationCompleted = true;
+                // this._finishLoading();
+            }
+        });
+
+        timeline.to(this.ui.circlePlaceHolder, 0.5, { autoAlpha: 0.5, ease: Power3.easeInOut }, 0);
+        timeline.staggerTo(this._splitedLoadingLabel.chars, 1.5, { y: '-100%', ease: Power3.easeOut }, 0.05, 0);
+
+        timeline.to(this._loader, 1.2, {
+            value: 0.7, ease: Power4.easeOut,
             onUpdate: () => {
                 this.ui.progressValue.innerHTML = parseInt(this._loader.value);
             },
             onComplete: () => {
                 this._startAnimationCompleted = true;
                 this._finishLoading();
-            } });
+            }
+        });
     }
 
     _finishLoading() {
         if (!this._startAnimationCompleted || !this._loadedCompleted) return;
 
-        TweenLite.to(this._loader, 2, { value: 100,
+        let timeline = new TimelineLite({ onComplete: this._finishAnimationComplete });
+
+        timeline.to(this._loader, 2, {
+            value: 1,
             onUpdate: () => {
                 this.ui.progressValue.innerHTML = parseInt(this._loader.value);
             },

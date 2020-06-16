@@ -5,6 +5,7 @@ import bindAll from '../utils/bindAll';
 import Worker from '../workers/UIScene.worker.js';
 
 import ThreeScene from '../modules/threeModules/ThreeScene';
+import ScrollTriggerManager from '../managers/ScrollTriggerManager';
 
 class ThreeCanvasComponent {
     constructor(options) {
@@ -19,13 +20,13 @@ class ThreeCanvasComponent {
 
     close() {
         this._removeEventListeners();
-     
+
         if (this._isOffscreen) {
             this._worker.postMessage({
                 name: 'close',
             }, []);
         } else {
-            
+
         }
     }
 
@@ -77,7 +78,7 @@ class ThreeCanvasComponent {
     _setupOffscreenCanvasScene() {
         this._offscreenCanvas = this.el.transferControlToOffscreen();
         this._worker = new Worker();
-        
+
         this._worker.postMessage({
             name: 'setup',
             canvas: this._offscreenCanvas,
@@ -127,6 +128,21 @@ class ThreeCanvasComponent {
         Emitter.removeListener('RESIZE:END', this._resizeHandler);
     }
 
+    _scrollCallHandler(e) {
+        if (e.name = 'sea') {
+            const state = e.state.toUpperCase();
+
+            if (this._isOffscreen) {
+                this._worker.postMessage({
+                    name: 'call',
+                    event: `SEA:${state}`
+                }, []);
+            } else {
+                Emitter.emit(`SEA:${state}`, e);
+            }
+        }
+    }
+
     _tickHandler() {
         this._update();
     }
@@ -138,7 +154,7 @@ class ThreeCanvasComponent {
                 event: {}
             }, []);
         } else {
-            
+
         }
     }
 
@@ -149,7 +165,7 @@ class ThreeCanvasComponent {
                 event: this._sendWoker(e)
             }, []);
         } else {
-            
+
         }
     }
 
