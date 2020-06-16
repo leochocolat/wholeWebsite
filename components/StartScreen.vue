@@ -1,6 +1,8 @@
 <template>
     <div class="start-screen is-active" @click="startDevExperience">
-        <canvas class="start-screen__canvas js-offscreen-canvas"></canvas>
+        <!-- disabled -->
+        <canvas class="start-screen__canvas js-offscreen-canvas" style="display: none"></canvas>
+        <!-- disabled -->
 
         <div class="container start-screen__container">
             <div class="start-screen__progress">
