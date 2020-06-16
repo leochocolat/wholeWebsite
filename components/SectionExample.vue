@@ -1,6 +1,6 @@
 <template>
     <section data-scroll data-scroll-offset="300" class="section-example">
-        Section {{ id }}
+        <!-- Section {{ id }} -->
     </section>
 </template>
 

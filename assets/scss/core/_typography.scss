@@ -1,9 +1,16 @@
 .heading {
-        
+    font-size: rem(36px);
+    line-height: rem(36px);
+    letter-spacing: -1px;
+    font-family: $exo;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 .paragraph {
-    
+    font-size: rem(14px);   
+    font-family: $exo;
+    font-weight: 100;
 }
 
 

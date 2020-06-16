@@ -1,6 +1,7 @@
 <template>
   <div class="page-home js-scroll-container">
     <div class="js-scroll-content">
+      <SectionAir />
       <SectionExample v-for="(item, index) in 2" :key="index" :id="index" />
       <SectionExample data-scroll data-scroll-call="sea" data-scroll-repeat="true" :id="99" />
       <SectionVideoPlayer />
@@ -18,6 +19,7 @@ import page from '~/assets/javascript/mixins/page';
 import Footer from '~/components/partials/Footer';
 import SectionExample from '~/components/SectionExample';
 import SectionVideoPlayer from '~/components/sections/SectionVideoPlayer';
+import SectionAir from '~/components/sections/SectionAir';
 
 export default {
   data() { return { namespace: 'home' } },
@@ -25,7 +27,9 @@ export default {
   components: {
     SectionExample,
     Footer,
-    SectionVideoPlayer
+    SectionVideoPlayer,
+    SectionAir,
+    
   },
   asyncData({ env }) {
     return Promise.all([

@@ -1,6 +1,6 @@
 import Emitter from '../events/Emitter';
 import bindAll from '../utils/bindAll';
-import { TweenLite, TimelineLite, Power0, Power3 } from 'gsap';
+import { TweenLite, TimelineLite, Power0, Power3, Power4 } from 'gsap';
 
 import SplitText from '../vendors/SplitText.js';
 
@@ -47,7 +47,7 @@ class LoaderComponent {
         this._splitedStartLabel = new SplitText(this.ui.startLabel, {
             type: 'chars',
             linesClass: 'char letter--++',
-        })
+        });
     }
 
     _setupCircleAnimation() {
@@ -65,7 +65,7 @@ class LoaderComponent {
         timeline.to(this.ui.circlePlaceHolder, 0.5, { autoAlpha: 0.5, ease: Power3.easeInOut }, 0);
         timeline.staggerTo(this._splitedLoadingLabel.chars, 1.5, { y: '-100%', ease: Power3.easeOut }, 0.05, 0);
 
-        timeline.to(this._loader, 1.2, { value: 0.7,
+        timeline.to(this._loader, 1.2, { value: 0.7, ease: Power4.easeOut,
             onUpdate: () => {
                 this._timeline.progress(this._loader.value);
             }

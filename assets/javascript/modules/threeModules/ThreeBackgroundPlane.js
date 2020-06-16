@@ -22,7 +22,6 @@ class ThreeBackgroundPlane {
     }
 
     update(time, deltaTime, fps) {
-        if (!this._uniforms) return;
         this._uniforms.u_time.value = time;
         this._uniforms.u_delta_time.value = deltaTime;
         this._uniforms.u_fps.value = fps;
@@ -32,7 +31,6 @@ class ThreeBackgroundPlane {
         this._width = width;
         this._height = height;
 
-        if (!this._mesh) return;
         this._mesh.scale.set(this._width * (this._width/POS_Z), this._height * (this._height/POS_Z), 1);
         this._uniforms.u_resolution.value.set(this._width, this._height, 1);
     }

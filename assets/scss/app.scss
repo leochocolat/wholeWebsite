@@ -16,11 +16,12 @@
 /**
  * Partials
  */
- @import './partials/three-scene';
- @import './partials/start-screen';
- @import './partials/grid';
- @import './partials/footer';
- @import './partials/navbar';
+@import './partials/three-scene';
+@import './partials/start-screen';
+@import './partials/grid';
+@import './partials/footer';
+@import './partials/navbar';
+@import './partials/video-player';
 
 /**
  * Headers
@@ -30,6 +31,8 @@
  * Sections
  */
 @import './sections/section-example';
+@import './sections/section-air';
+@import './sections/section-video-player';
 
 /**
  * Pages

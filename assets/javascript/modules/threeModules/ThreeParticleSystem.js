@@ -52,9 +52,8 @@ class ThreeParticleSystem {
 
         for (let i = 0; i < this._amount; i++) {
             const x = Math.random() * this._width * 2 - this._width;
-            const y = Math.random() * this._height * 2 - this._height;
-            // const z = Math.random() * -500;
-            const z = 0;
+            const y = Math.random() * this._height * 4 - this._height * 2;
+            const z = Math.random() * -500;
 
             vertices.push(x, y, z);
         }
@@ -92,7 +91,7 @@ class ThreeParticleSystem {
     }
 
     _scrollHandler(e) {
-        if (!this._allowParticulesAnimation) return;
+        // if (!this._allowParticulesAnimation) return;
         this._particleSystem.position.y -= e.delta * 0.5;
     }
 

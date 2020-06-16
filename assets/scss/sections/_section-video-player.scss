@@ -1,3 +1,17 @@
 .section-video-player {
-    height: 100vh;
+    height: auto;   
+}
+
+.section-video-player__container {
+    padding: 200px 0;
+}
+
+.section-video-player__content {
+    width: size(20, 24);
+
+    margin: auto;
+}
+
+.section-video-player__heading {
+    margin-bottom: 50px;
 }
