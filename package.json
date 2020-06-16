@@ -11,12 +11,15 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^13.4.0",
+    "@contentful/rich-text-types": "^14.1.0",
     "contentful": "^7.14.4",
     "dat.gui": "^0.7.7",
     "events": "^3.1.0",
     "glsl-noise": "0.0.0",
     "gsap": "^3.2.6",
-    "three": "^0.117.1"
+    "three": "^0.117.1",
+    "virtual-scroll": "^1.5.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

@@ -3,7 +3,7 @@
         <div class="section-description__container container">
             <div class="section-description__content">
                 <div data-scroll data-scroll-speed="0.2" data-scroll-position="elementTop" data-scroll-offset="200" class="section-description__heading heading js-heading-split">
-                    Incarnez ensemble des groupes d’animaux grégaires en suivant les périples de différents animaux migratoires, expérimentez en groupe, ce voyage à travers leurs yeux.
+                    {{ data.fields.title }}
                 </div>
             </div>
             <div class="section-description__images-container">
@@ -22,6 +22,12 @@
 import SplitText from '~/assets/javascript/vendors/SplitText.js';
 
 export default {
+    props: {
+        data: {
+            type: Object,
+            required: false      
+        }
+    },
     mounted() {
         const el = this.$el.querySelector('.js-heading-split');
 

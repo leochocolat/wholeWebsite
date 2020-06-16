@@ -1,11 +1,11 @@
 <template>
   <div class="page-home js-scroll-container">
     <div class="js-scroll-content">
-      <SectionIntro />
-      <SectionDescription />
+      <SectionIntro :data="sectionIntro" />
+      <SectionDescription :data="sectionDescription" />
       <!-- <SectionExample data-scroll data-scroll-call="sea" data-scroll-repeat="true" :id="99" /> -->
-      <SectionVideoPlayer />
-      <Footer />
+      <SectionVideoPlayer :data="sectionDemonstration" />
+      <Footer :data="footer" />
     </div>
   </div>
 </template>
@@ -35,11 +35,23 @@ export default {
   asyncData({ env }) {
     return Promise.all([
       client.getEntries({
-        'content_type': 'pageHome',
-      })
-    ]).then(([homeEntries]) => {
+        'content_type': 'sectionIntro',
+      }),
+      client.getEntries({
+        'content_type': 'sectionDescription',
+      }),
+      client.getEntries({
+        'content_type': 'sectionDemonstration',
+      }),
+      client.getEntries({
+        'content_type': 'footer',
+      }),
+    ]).then(([sectionIntro, sectionDescription, sectionDemonstration, footer]) => {
       return {
-        data: homeEntries.items[0]
+        sectionIntro: sectionIntro.items[0],
+        sectionDescription: sectionDescription.items[0],
+        sectionDemonstration: sectionDemonstration.items[0],
+        footer: footer.items[0],
       }
     }).catch(console.error)
   }

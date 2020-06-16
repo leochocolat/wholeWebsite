@@ -25,6 +25,7 @@ class LoaderComponent {
             loaderCanvasComponent: new LoaderCanvasComponent({ el: this.ui.canvas })
         }
 
+        this.isComplete = false;
         this._loader = { value: 0 };
 
         this._bindAll();
@@ -88,6 +89,7 @@ class LoaderComponent {
         let timeline = new TimelineLite();
 
         this.ui.startButtonContainer.style.pointerEvents = 'all';
+        this.isComplete = true;
 
         timeline.staggerTo(this._splitedLoadingLabel.chars, 1.5, { y: '-200%', ease: Power3.easeOut }, 0.05, 0);
         timeline.staggerTo(this._splitedStartLabel.chars, 1.5, { y: '-100%', ease: Power3.easeOut }, 0.05, 0);

@@ -2,7 +2,9 @@
     <section class="section-video-player">
         <div class="container section-video-player__container">
             <div class="section-video-player__content">
-                <div data-scroll data-scroll-offset="200" class="heading section-video-player__heading js-heading-split">Découvrez l'expérience</div>
+                <div data-scroll data-scroll-offset="200" class="heading section-video-player__heading js-heading-split">
+                    {{ data.fields.title }}
+                </div>
                 <VideoPlayer />
             </div>
         </div>
@@ -14,6 +16,12 @@ import SplitText from '~/assets/javascript/vendors/SplitText.js';
 import VideoPlayer from '~/components/partials/VideoPlayer';
 
 export default {
+    props: {
+        data: {
+            type: Object,
+            required: false
+        }
+    },
     components: {
         VideoPlayer
     },

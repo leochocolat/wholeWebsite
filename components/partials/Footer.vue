@@ -6,54 +6,40 @@
                     <div class="footer__credits-title">
                         Développement
                     </div>
-                    <ul class="footer__credits-list">
-                        <li class="footer__credits-list-item">
-                            <a href="" target="_blank" noopener="true" class="footer__credits-link">
-                                Serge Bocancea
-                            </a>
-                        </li>
-                        <li class="footer__credits-list-item">
-                            <a href="" target="_blank" noopener="true" class="footer__credits-link">
-                                Brieuc Caillot
-                            </a>
-                        </li>
-                        <li class="footer__credits-list-item">
-                            <a href="" target="_blank" noopener="true" class="footer__credits-link">
-                                Léo Mouraire
-                            </a>
-                        </li>
-                    </ul>
+                    <CustomRichTextRenderer :document="data.fields.creditsDevelopment" />
                 </div
                 ><div class="footer__credits footer__credits--design">
                     <div class="footer__credits-title">
                         Design
                     </div>
-                    <ul class="footer__credits-list">
-                        <li class="footer__credits-list-item">
-                            <a href="" target="_blank" noopener="true" class="footer__credits-link">
-                                Emma Rimbert
-                            </a>
-                        </li>
-                        <li class="footer__credits-list-item">
-                            <a href="" target="_blank" noopener="true" class="footer__credits-link">
-                                Pauline Fuchs
-                            </a>
-                        </li>
-                    </ul>
+                    <CustomRichTextRenderer :document="data.fields.creditsDesign" />
                 </div
                 ><div class="footer__gobelins-logo-container">
                     <img src="https://www.gobelins.fr/sites/all/themes/custom/gobelins_theme/build/images/logo-gobelins.png" alt="" class="footer__gobelins-logo">
                 </div>
             </div>
             <div class="footer__legals">
-                ©2020 by WHOLE. All rights reserved
+                {{ data.fields.legals }}
             </div>
         </div>
     </footer>
 </template>
 
 <script>
+import CustomRichTextRenderer from '~/components/partials/CustomRichTextRenderer';
+
 export default {
-    
+    props: {
+        data: {
+            type: Object,
+            required: false      
+        }
+    },
+    components: {
+        CustomRichTextRenderer
+    },
+    mounted() {
+        console.log(this.data.fields.legals);
+    }
 }
 </script>

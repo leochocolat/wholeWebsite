@@ -3,11 +3,11 @@
         <div class="section-intro__container container">
             <div class="section-intro__content">
                 <p class="section-intro__paragraph paragraph" data-scroll data-scroll-speed="0.3" data-scroll-delay="0.2" data-scroll-position="top">
-                    Participez à un grand voyage
+                    {{ data.fields.subtitle }}
                 </p>
                 <div class="section-intro__heading heading" data-scroll data-scroll-speed="0.3" data-scroll-delay="0.05" data-scroll-position="top">
                     <div class="section-intro__heading-split js-heading-split">
-                        Inspiré des déplacements collectifs et aventures des animaux migratoires.
+                        {{ data.fields.title }}
                     </div>
                 </div>
             </div>
@@ -22,6 +22,12 @@
 import SplitText from '~/assets/javascript/vendors/SplitText.js';
 
 export default {
+    props: {
+        data: {
+            type: Object,
+            required: false      
+        }
+    },
     mounted() {
         const el = this.$el.querySelector('.js-heading-split');
 

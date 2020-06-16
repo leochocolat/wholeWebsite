@@ -1,12 +1,30 @@
 .footer {
     position: relative;
 
-    // opacity: 0;
-    // transition: opacity 2s $Power3Out;
+    opacity: 0;
+    transition: opacity 2s $Power3Out;
 
-    // &.isInView {
-    //     opacity: 1;
-    // }
+    &.isInView {
+        opacity: 1;
+    }
+
+    li {
+        margin-bottom: 25px;
+    
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    a {
+        opacity: 1;
+    
+        transition: opacity 0.5s $Power3Out;
+    
+        &:hover {
+            opacity: 0.7;
+        }
+    }
 }
 
 .footer__container {
@@ -35,24 +53,6 @@
 
     text-transform: uppercase;
     font-weight: 100;
-}
-
-.footer__credits-list-item {
-    margin-bottom: 25px;
-
-    &:last-child {
-        margin-bottom: 0;
-    }
-}
-
-.footer__credits-link {
-    opacity: 1;
-
-    transition: opacity 0.5s $Power3Out;
-
-    &:hover {
-        opacity: 0.7;
-    }
 }
 
 .footer__gobelins-logo-container {

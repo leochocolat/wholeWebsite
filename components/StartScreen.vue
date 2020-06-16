@@ -8,7 +8,7 @@
             </div>
 
             <div class="start-screen__start-button-container js-button-container">
-                <div class="start-screen__start-button-label-container" @click="startExperience">
+                <div class="start-screen__start-button-label-container js-button" @click="startExperience">
                     <span class="start-screen__start-button-label js-start-label">
                         Explore
                     </span>
@@ -47,11 +47,17 @@ export default {
     methods: {
         setup() {
             this._loaderComponent = new LoaderComponent({ el: this.$el });
+
+            // Emitter.on('SNAP', this.startExperience);
         },
         startExperience(e) {
+            if (!this._loaderComponent.isComplete) return;
+
             Emitter.emit('START:EXPERIENCE', {});
-            e.currentTarget.classList.add('is-active');
+            this.$el.querySelector('.js-button').classList.add('is-active');
             this.$el.classList.remove('is-active');
+
+            // Emitter.removeListener('SNAP', this.startExperience);
         },
         //for dev only
         startDevExperience(e) {
