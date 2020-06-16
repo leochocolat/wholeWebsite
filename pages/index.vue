@@ -3,7 +3,6 @@
     <div class="js-scroll-content">
       <SectionIntro :data="sectionIntro" />
       <SectionDescription :data="sectionDescription" />
-      <!-- <SectionExample data-scroll data-scroll-call="sea" data-scroll-repeat="true" :id="99" /> -->
       <SectionVideoPlayer :data="sectionDemonstration" />
       <Footer :data="footer" />
     </div>

@@ -32,6 +32,10 @@ class LoaderComponent {
         this._setup();
     }
 
+    transitionOut() {
+        this.components.loaderCanvasComponent.transitionOut();
+    }
+
     _setup() {
         this._setupSplitText();
         this._setupEventListeners();

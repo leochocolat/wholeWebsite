@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { TweenLite, Power3 } from 'gsap';
 
 import fragment from '../shaders/particles/fragment.glsl';
 import vertex from '../shaders/particles/vertex.glsl';
@@ -7,13 +8,14 @@ const PESPECTIVE = 800;
 let width, height, dpr;
 let canvas, renderer, scene, camera, container;
 let fov;
-let imageSize, imageData, texture;
-let mesh, cube, fog;
+let imageSize, imageData, texture, uniforms;
+let mesh, cube;
 
 const handlers = {
     setup,
     resize,
     imageDataReady,
+    transitionOut
 };
 
 if (typeof self === "object") {
@@ -33,8 +35,21 @@ function setup(e) {
     update();
 }
 
+function transitionIn() {
+    TweenLite.to(uniforms.uSize, 1, { value: 0.3, ease: Power3.easeInOut });
+    TweenLite.to(uniforms.uRandom, 1, { value: 2.0, ease: Power3.easeInOut });
+    TweenLite.fromTo(uniforms.uDepth, 2, { value: 20.0 }, { value: 0.4, ease: Power3.easeInOut });
+}
+
+function transitionOut() {
+    TweenLite.to(uniforms.uSize, 2, { value: 0.0, ease: Power3.easeInOut });
+    TweenLite.to(uniforms.uRandom, 1, { value: 10.0, ease: Power3.easeInOut });
+    TweenLite.to(uniforms.uDepth, 2, { value: -20.0, ease: Power3.easeInOut });
+}
+
 function loadTexture() {
-    let url = 'https://res.cloudinary.com/dgxpb4jhs/image/upload/v1592322434/sample-01_plvqsx.png';
+    // let url = 'https://res.cloudinary.com/dgxpb4jhs/image/upload/v1592322434/sample-01_plvqsx.png';
+    let url = '../images/whole-texture.jpg';
     const loader = new THREE.ImageBitmapLoader();
     loader.load(url, response => {
         texture = new THREE.CanvasTexture(response);
@@ -60,21 +75,15 @@ function setupScene(e) {
 
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
-    camera.position.z = 1000;
-    camera.position.y = -140;
+    fov = (180 * (2 * Math.atan(height / 2 / PESPECTIVE))) / Math.PI;
 
+    camera = new THREE.PerspectiveCamera(fov, width / height, 1, 1000);
+    // camera.position.z = 300;
+    // camera.set(0, 0, PESPECTIVE);
 
     container = new THREE.Object3D();
 
     scene.add(container);
-
-    // cube test
-    // let cubeGeo = new THREE.BoxGeometry(100, 100, 100);
-    // let cubeMaterial = new THREE.MeshStandardMaterial(0xffffff);
-    // cube = new THREE.Mesh(cubeGeo, cubeMaterial);
-
-    // container.add(cube);
 }
 
 function resize(e) {
@@ -87,6 +96,10 @@ function resize(e) {
     renderer.setSize(width, height, false);
     renderer.setPixelRatio(dpr);
 
+    fov = (180 * (2 * Math.atan(height / 2 / PESPECTIVE))) / Math.PI;
+
+    camera.fov = fov;
+    // camera.set(0, 0, PESPECTIVE);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 }
@@ -94,7 +107,7 @@ function resize(e) {
 function setupParticules() {
     //filter
     const numPoints = imageSize.width * imageSize.height;
-    const threshold = 34;
+    const threshold = 100;
 
     let numVisible = 0;
 
@@ -107,12 +120,12 @@ function setupParticules() {
     //console.log('numVisible : ', numVisible, 'numPoints : ', numPoints);
 
     //points
-    const uniforms = {
+    uniforms = {
         uTime: { value: 0.0 },
-        uRandom: { value: 1.0 },
-        uDepth: { value: 4.0 },
-        uSize: { value: 1.5 },
-        uTextureSize: { value: new THREE.Vector2(width, height) },
+        uRandom: { value: 2.0 },
+        uDepth: { value: 0.0 },
+        uSize: { value: 0.0 },
+        uTextureSize: { value: new THREE.Vector2(imageSize.width, imageSize.height) },
         uTexture: { value: texture },
         uTouch: { value: null }
     };
@@ -155,8 +168,8 @@ function setupParticules() {
 
         if (originalColors[i * 4 + 0] <= threshold) continue;
 
-        offsets[j * 3 + 0] = i % width;
-        offsets[j * 3 + 1] = Math.floor(i / width);
+        offsets[j * 3 + 0] = i % imageSize.width;
+        offsets[j * 3 + 1] = Math.floor(i / imageSize.width);
 
         indices[j] = i;
 
@@ -170,6 +183,7 @@ function setupParticules() {
     geometry.setAttribute('angle', new THREE.InstancedBufferAttribute(angles, 1, false));
 
     mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(0, 0, -200);
     container.add(mesh);
 }
 
@@ -179,12 +193,8 @@ function update() {
         cube.rotation.x += 0.01;
     }
 
-    // camera.position.z += -1;
-    // camera.rotation.y += 0.1;
-    // camera.rotation.x += 0.1;
-
     if (mesh) {
-        mesh.material.uniforms.uTime.value += 1;
+        mesh.material.uniforms.uTime.value += 0.1;
     }
 
     renderer.render(scene, camera);
@@ -192,16 +202,11 @@ function update() {
     requestAnimationFrame(update);
 }
 
-// function textureLoaded(texture) {
-
-//     // texture = texture.texture;
-
-//     // setupParticules();
-// }
 
 function imageDataReady(e) {
     imageSize = e.size;
     imageData = e.imageData;
 
     setupParticules();
+    transitionIn();
 }

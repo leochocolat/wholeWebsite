@@ -1,8 +1,6 @@
 <template>
     <div class="start-screen is-active" @click="startDevExperience">
-        <!-- disabled -->
-        <canvas class="start-screen__canvas js-offscreen-canvas" style="display: none"></canvas>
-        <!-- disabled -->
+        <canvas class="start-screen__canvas js-offscreen-canvas"></canvas>
 
         <div class="container start-screen__container">
             <div class="start-screen__progress">
@@ -30,7 +28,6 @@
             </div>
         </div>
 
-
     </div>
 </template>
 
@@ -55,6 +52,7 @@ export default {
         startExperience(e) {
             if (!this._loaderComponent.isComplete) return;
 
+            this._loaderComponent.transitionOut();
             Emitter.emit('START:EXPERIENCE', {});
             this.$el.querySelector('.js-button').classList.add('is-active');
             this.$el.classList.remove('is-active');
@@ -65,8 +63,9 @@ export default {
         startDevExperience(e) {
             if (process.env.NODE_ENV != 'development') return;
             
-            Emitter.emit('START:EXPERIENCE', {});
-            this.$el.classList.remove('is-active');
+            this._loaderComponent.transitionOut();
+            // Emitter.emit('START:EXPERIENCE', {});
+            // this.$el.classList.remove('is-active');
         }
     }
 }

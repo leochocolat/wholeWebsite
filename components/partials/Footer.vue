@@ -39,7 +39,7 @@ export default {
         CustomRichTextRenderer
     },
     mounted() {
-        console.log(this.data.fields.legals);
+        
     }
 }
 </script>

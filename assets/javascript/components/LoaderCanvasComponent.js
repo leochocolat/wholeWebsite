@@ -11,6 +11,12 @@ class LoaderCanvasComponent {
         this._setup();
     }
 
+    transitionOut() {
+        if (this._worker) {
+            this._worker.postMessage({ type: 'transitionOut' }, []);
+        }
+    }
+
     _setup() {
         if ('OffscreenCanvas' in window) {
             this._setupCanvas();
