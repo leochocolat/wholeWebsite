@@ -56,17 +56,20 @@ class LoaderComponent {
 
         this._timeline.fromTo(this.ui.circle, 1, { strokeDashoffset: 220 }, { strokeDashoffset: 0, ease: Power0.easeNone });
     }
-    
+
     _startProgress() {
-        let timeline = new TimelineLite({ onComplete: () => {
-            this._startAnimationCompleted = true;
-            this._finishLoading();
-        } });
-        
+        let timeline = new TimelineLite({
+            onComplete: () => {
+                this._startAnimationCompleted = true;
+                this._finishLoading();
+            }
+        });
+
         timeline.to(this.ui.circlePlaceHolder, 0.5, { autoAlpha: 0.5, ease: Power3.easeInOut }, 0);
         timeline.staggerTo(this._splitedLoadingLabel.chars, 1.5, { y: '-100%', ease: Power3.easeOut }, 0.05, 0);
 
-        timeline.to(this._loader, 1.2, { value: 0.7, ease: Power4.easeOut,
+        timeline.to(this._loader, 1.2, {
+            value: 0.7, ease: Power4.easeOut,
             onUpdate: () => {
                 this._timeline.progress(this._loader.value);
             }
@@ -78,7 +81,8 @@ class LoaderComponent {
 
         let timeline = new TimelineLite({ onComplete: this._finishAnimationComplete });
 
-        timeline.to(this._loader, 2, { value: 1,
+        timeline.to(this._loader, 2, {
+            value: 1,
             onUpdate: () => {
                 this._timeline.progress(this._loader.value);
             }
