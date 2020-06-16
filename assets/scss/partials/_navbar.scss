@@ -31,3 +31,9 @@
     font-size: rem(25px);
     text-transform: uppercase;
 }
+
+@include mq-extra-narrow {
+    .navbar {
+        top: 40px;
+    }
+}

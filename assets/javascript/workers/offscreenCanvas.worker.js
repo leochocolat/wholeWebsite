@@ -57,11 +57,11 @@ function setupScene(e) {
     scene.add(container);
 
     // cube test
-    let cubeGeo = new THREE.BoxGeometry(100, 100, 100);
-    let cubeMaterial = new THREE.MeshStandardMaterial(0xffffff);
-    cube = new THREE.Mesh(cubeGeo, cubeMaterial);
+    // let cubeGeo = new THREE.BoxGeometry(100, 100, 100);
+    // let cubeMaterial = new THREE.MeshStandardMaterial(0xffffff);
+    // cube = new THREE.Mesh(cubeGeo, cubeMaterial);
 
-    container.add(cube);
+    // container.add(cube);
 }
 
 function resize(e) {

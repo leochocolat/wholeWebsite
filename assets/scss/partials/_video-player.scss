@@ -3,6 +3,24 @@
 
     width: 100%;
     height: auto;
+
+    opacity: 0;
+    transition: opacity 2s $Power3Out;
+
+    overflow: hidden;
+
+    .video-player__video {
+        transform: scale(1.2);
+        transition: transform 2s $Power3Out;
+    }
+
+    &.isInView {
+        opacity: 1;
+
+        .video-player__video {
+            transform: scale(1);
+        }
+    }
 }
 
 .video-player__video {
@@ -35,6 +53,12 @@
 
         pointer-events: all;
     }
+
+    &:hover {
+        .video-player__button-circle {
+            transform: scale(1.2);
+        }   
+    }
 }
 
 .video-player__button-circle {
@@ -53,6 +77,7 @@
 
     background-color: transparent;
     border: solid 1px $white;
+    transition: transform 1s $Power3Out;
 }
 
 .video-player__button-svg {

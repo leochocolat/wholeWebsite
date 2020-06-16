@@ -6,7 +6,9 @@
                     Participez à un grand voyage
                 </p>
                 <div class="section-intro__heading heading" data-scroll data-scroll-speed="0.3" data-scroll-delay="0.05" data-scroll-position="top">
-                    Inspiré des déplacements collectifs et aventures des animaux migratoires.
+                    <div class="section-intro__heading-split js-heading-split">
+                        Inspiré des déplacements collectifs et aventures des animaux migratoires.
+                    </div>
                 </div>
             </div>
             <div class="section-intro__video-container" data-scroll data-scroll-offset="500">
@@ -17,7 +19,23 @@
 </template>
 
 <script>
+import SplitText from '~/assets/javascript/vendors/SplitText.js';
+
 export default {
-    
+    mounted() {
+        const el = this.$el.querySelector('.js-heading-split');
+
+        let splitLines = new SplitText(el, {
+            type: 'lines',
+            linesClass: 'line line--++',
+        }).lines;
+        
+        for (let i = 0; i < splitLines.length; i++) {
+            new SplitText(splitLines[i], {
+                type: 'lines',
+                linesClass: `animated-line animated-line--${i}`,
+            });
+        }
+    }   
 }
 </script>

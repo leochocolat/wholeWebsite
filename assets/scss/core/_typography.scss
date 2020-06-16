@@ -26,10 +26,11 @@
 
 @include mq-extra-narrow {
     .heading {
-        
+        font-size: rem(30px);
+        line-height: rem(30px);
     }
     
     .paragraph {
-        
+
     }
 }

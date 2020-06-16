@@ -2,8 +2,8 @@
   <div class="page-home js-scroll-container">
     <div class="js-scroll-content">
       <SectionIntro />
-      <SectionExample v-for="(item, index) in 2" :key="index" :id="index" />
-      <SectionExample data-scroll data-scroll-call="sea" data-scroll-repeat="true" :id="99" />
+      <SectionDescription />
+      <!-- <SectionExample data-scroll data-scroll-call="sea" data-scroll-repeat="true" :id="99" /> -->
       <SectionVideoPlayer />
       <Footer />
     </div>
@@ -20,6 +20,7 @@ import Footer from '~/components/partials/Footer';
 import SectionExample from '~/components/SectionExample';
 import SectionVideoPlayer from '~/components/sections/SectionVideoPlayer';
 import SectionIntro from '~/components/sections/SectionIntro';
+import SectionDescription from '~/components/sections/SectionDescription';
 
 export default {
   data() { return { namespace: 'home' } },
@@ -29,7 +30,7 @@ export default {
     Footer,
     SectionVideoPlayer,
     SectionIntro,
-    
+    SectionDescription
   },
   asyncData({ env }) {
     return Promise.all([

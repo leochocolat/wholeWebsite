@@ -1,5 +1,5 @@
 <template>
-    <div class="video-player">
+    <div class="video-player" data-scroll data-scroll-offset="200">
         <video class="video-player__video js-video" playsinline>
             <!-- <source :src="`https://storage.googleapis.com/webfundamentals-assets/videos/chrome.webm`" type="video/mp4"> -->
             <source :src="`https://storage.googleapis.com/webfundamentals-assets/videos/chrome.webm`" type="video/webm">

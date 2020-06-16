@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer">
+    <footer class="footer" data-scroll data-scroll-offset="100">
         <div class="footer__container container">
             <div class="footer__content">
                 <div class="footer__col">
