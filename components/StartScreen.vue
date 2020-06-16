@@ -52,20 +52,22 @@ export default {
         startExperience(e) {
             if (!this._loaderComponent.isComplete) return;
 
-            this._loaderComponent.transitionOut();
-            Emitter.emit('START:EXPERIENCE', {});
             this.$el.querySelector('.js-button').classList.add('is-active');
-            this.$el.classList.remove('is-active');
-
             // Emitter.removeListener('SNAP', this.startExperience);
         },
         //for dev only
         startDevExperience(e) {
             if (process.env.NODE_ENV != 'development') return;
             
+            this.transitionOut();
+        },
+        transitionOut() {
             this._loaderComponent.transitionOut();
-            // Emitter.emit('START:EXPERIENCE', {});
-            // this.$el.classList.remove('is-active');
+
+            setTimeout(() => {
+                Emitter.emit('START:EXPERIENCE', {});
+                this.$el.classList.remove('is-active');
+            }, 800);
         }
     }
 }
