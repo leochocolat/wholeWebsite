@@ -1,12 +1,12 @@
 .footer {
     position: relative;
 
-    opacity: 0;
-    transition: opacity 2s $Power3Out;
+    // opacity: 0;
+    // transition: opacity 2s $Power3Out;
 
-    &.isInView {
-        opacity: 1;
-    }
+    // &.isInView {
+    //     opacity: 1;
+    // }
 }
 
 .footer__container {
@@ -15,44 +15,85 @@
 }
 
 .footer__content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    width: 100%;
 
-    padding-bottom: 80px;
+    margin-bottom: 100px;
 }
 
-.footer__col {
-    width: 25%;
+.footer__credits {
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 50px;
+
+    font-size: rem(17px);
 }
 
-.footer__project-name {
-    font-family: $faune;
-    font-size: rem(25px);
-    text-align: left;
+.footer__credits-title {
+    margin-bottom: 40px;
+
     text-transform: uppercase;
-}
-
-.footer__team-title {
-    margin-bottom: 15px;
-    font-weight: 400;
-}
-
-.footer__team-list-item {
     font-weight: 100;
-    line-height: rem(30px);
 }
 
-.footer__logo-gobelins-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+.footer__credits-list-item {
+    margin-bottom: 25px;
 
-    position: relative;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.footer__credits-link {
+    opacity: 1;
+
+    transition: opacity 0.5s $Power3Out;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.footer__gobelins-logo-container {
     width: 100%;
 }
 
-.footer__logo-gobelins {
-    width: 50%;
+.footer__gobelins-logo {
+    width: 100%;
+    max-width: 150px;
     height: auto;
+}
+
+.footer__legals {
+    font-size: rem(14px);
+    font-weight: 100;
+}
+
+@include mq-regular {
+    .footer__content {
+        width: size(17, 24);
+        margin-left: size(7, 24);
+    }
+
+    .footer__credits {
+        display: inline-block;
+        vertical-align: top;
+
+        width: size(6, 17);
+
+        margin-bottom: 0;
+    }
+
+    .footer__gobelins-logo-container {
+        display: inline-block;
+        width: size(3, 17);
+        margin-left: size(2, 17);
+        font-size: 0;
+    }
+    
+    .footer__gobelins-logo {
+        max-width: initial;
+        height: auto;
+    }
 }
