@@ -58,8 +58,6 @@ function setupScene(e) {
         antialias: true
     });
 
-    // renderer.setClearColor(0x000000);
-
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);

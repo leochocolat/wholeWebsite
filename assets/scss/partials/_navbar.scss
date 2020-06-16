@@ -1,0 +1,39 @@
+.navbar {
+    position: fixed;
+    left: 0;
+    top: 80px;
+
+    height: 0px;
+    width: 100%;
+}
+
+.navbar__container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: 0;
+
+    margin: auto;
+}
+
+.navbar__home-button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    margin: auto;
+    height: 35px;
+
+    font-family: $faune;
+    font-size: rem(25px);
+    text-transform: uppercase;
+}
+
+@include mq-extra-narrow {
+    .navbar {
+        top: 40px;
+    }
+}

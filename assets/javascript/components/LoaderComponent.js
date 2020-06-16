@@ -1,6 +1,8 @@
 import Emitter from '../events/Emitter';
 import bindAll from '../utils/bindAll';
-import { TweenLite } from 'gsap';
+import { TweenLite, TimelineLite, Power0, Power3, Power4 } from 'gsap';
+
+import SplitText from '../vendors/SplitText.js';
 
 import LoaderCanvasComponent from './LoaderCanvasComponent';
 
@@ -10,7 +12,13 @@ class LoaderComponent {
 
         this.ui = {
             canvas: this.el.querySelector('.js-offscreen-canvas'),
-            progressValue: this.el.querySelector('.js-progress-value'),
+            svg: this.el.querySelector('.js-loading-svg'),
+            circle: this.el.querySelector('.js-loading-circle'),
+            circlePlaceHolder: this.el.querySelector('.js-circle-placeholder'),
+            startLabel: this.el.querySelector('.js-start-label'),
+            loadingLabel: this.el.querySelector('.js-loading-label'),
+            startArrow: this.el.querySelector('.js-start-arrow'),
+            startButtonContainer: this.el.querySelector('.js-button-container'),
         }
 
         this.components = {
@@ -24,7 +32,9 @@ class LoaderComponent {
     }
 
     _setup() {
+        this._setupSplitText();
         this._setupEventListeners();
+        this._setupCircleAnimation();
         this._startProgress();
     }
 
@@ -50,7 +60,7 @@ class LoaderComponent {
         let timeline = new TimelineLite({
             onComplete: () => {
                 this._startAnimationCompleted = true;
-                // this._finishLoading();
+                this._finishLoading();
             }
         });
 
@@ -60,13 +70,9 @@ class LoaderComponent {
         timeline.to(this._loader, 1.2, {
             value: 0.7, ease: Power4.easeOut,
             onUpdate: () => {
-                this.ui.progressValue.innerHTML = parseInt(this._loader.value);
-            },
-            onComplete: () => {
-                this._startAnimationCompleted = true;
-                this._finishLoading();
+                this._timeline.progress(this._loader.value);
             }
-        });
+        }, 0);
     }
 
     _finishLoading() {
@@ -77,14 +83,19 @@ class LoaderComponent {
         timeline.to(this._loader, 2, {
             value: 1,
             onUpdate: () => {
-                this.ui.progressValue.innerHTML = parseInt(this._loader.value);
-            },
-            onComplete: this._finishAnimationComplete
-        })
+                this._timeline.progress(this._loader.value);
+            }
+        }, 0);
     }
 
     _transitionOut() {
+        let timeline = new TimelineLite();
 
+        this.ui.startButtonContainer.style.pointerEvents = 'all';
+
+        timeline.staggerTo(this._splitedLoadingLabel.chars, 1.5, { y: '-200%', ease: Power3.easeOut }, 0.05, 0);
+        timeline.staggerTo(this._splitedStartLabel.chars, 1.5, { y: '-100%', ease: Power3.easeOut }, 0.05, 0);
+        timeline.to(this.ui.startArrow, 1, { y: 0, autoAlpha: 1, ease: Power3.easeInOut }, 1);
     }
 
     _bindAll() {

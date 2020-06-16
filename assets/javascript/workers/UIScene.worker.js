@@ -11,6 +11,7 @@ const handlers = {
     'scroll': scrollHandler,
     'close': close,
     'start': startExperience,
+    'call': scrollCallHandler,
 };
 
 if (typeof self === 'object') {
@@ -29,6 +30,7 @@ if (typeof self === 'object') {
 function setup(e) {
     setupCanvas(e);
     setupThreeScene(e);
+    setupEventListeners();
 
     update();
 }
@@ -61,6 +63,10 @@ function update() {
     requestAnimationFrame(update);
 }
 
+function setupEventListeners() {
+    Emitter.on('MODEL:LOADED', modelLoadedHandler);
+}
+
 //handlers
 function resizeHandler(e) {
     width = e.width;
@@ -73,6 +79,16 @@ function resizeHandler(e) {
     threeScene.resize(width, height, devicePixelRatio);
 }
 
+function scrollCallHandler(e) {
+    Emitter.emit(e.event, {});
+}
+
 function scrollHandler(e) {
     Emitter.emit('SCROLL', e.event);
+}
+
+function modelLoadedHandler() {
+    self.postMessage({
+        name: 'MODEL:LOADED'
+    }, []);
 }

@@ -1,6 +1,7 @@
 import EventDispatcher from '../events/EventDispatcher';
 import ScrollManager from './ScrollManager';
 import Emitter from '../events/Emitter';
+import DeviceUtils from '../utils/DeviceUtils';
 
 import bindAll from '../utils/bindAll';
 import lerp from '../utils/lerp';
@@ -124,7 +125,9 @@ class ScrollTriggerManager extends EventDispatcher {
             }
             
             if (element.speed) {
-                this._transformElement(element);
+                if (!DeviceUtils.isTouch()) {
+                    this._transformElement(element);
+                };
             }
         }
     }

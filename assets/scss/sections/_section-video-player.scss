@@ -1,0 +1,44 @@
+.section-video-player {
+    height: auto;   
+}
+
+.section-video-player__container {
+    padding: 200px 0;
+}
+
+.section-video-player__content {
+    width: size(24, 24);
+
+    margin: auto;
+}
+
+.section-video-player__heading {
+    margin-bottom: 50px;
+
+    .line {
+        overflow: hidden;
+    }
+
+    .animated-line {
+        transform: translateY(105%);
+    }
+
+    &.isInView {
+        .animated-line {
+            transform: translateY(0);
+            transition: transform 1.5s $Power3Out;
+
+            @for $i from 0 to 10 {
+                &--#{$i} {
+                    transition-delay: #{$i * 0.1}s;
+                }
+            }
+        }
+    }
+}
+
+@include mq-regular {
+    .section-video-player__content {
+        width: size(20, 24);
+    }
+}

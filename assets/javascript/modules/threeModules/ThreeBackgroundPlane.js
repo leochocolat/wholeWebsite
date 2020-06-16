@@ -3,7 +3,7 @@ import vertex from '../../shaders/vertex.glsl';
 import Emitter from '../../events/Emitter';
 import bindAll from '../../utils/bindAll';
 
-import { TweenLite, Power3 } from 'gsap';
+import { TweenLite, TimelineLite, Power3, Power0 } from 'gsap';
 
 const POS_Z = -200;
 
@@ -37,6 +37,7 @@ class ThreeBackgroundPlane {
 
     _setup() {
         this._setupPlane();
+        this._setupGradientTimeline();
         this._setupEventListeners();
     }
 
@@ -51,7 +52,8 @@ class ThreeBackgroundPlane {
             u_primary_position: { value: 0.0 },
             u_secondary_color: { value: new THREE.Color(0x393C60), type : 'c' },
             u_secondary_position: { value: 0.0 },
-            u_third_color: { value: new THREE.Color(0x0015FF), type : 'c' },
+            u_third_color: { value: new THREE.Color(0x111737), type : 'c' },
+            u_third_position: { value: 1.0 },
         }
 
         let geometry = new THREE.PlaneGeometry(1, 1, 1);
@@ -59,6 +61,7 @@ class ThreeBackgroundPlane {
             uniforms: this._uniforms,
             fragmentShader: fragment,
             vertexShader: vertex,
+            fog: false
         });
 
         this._mesh = new THREE.Mesh(geometry, material);
@@ -66,6 +69,17 @@ class ThreeBackgroundPlane {
         this._mesh.scale.set(this._width * (this._width/POS_Z), this._height * (this._height/POS_Z), 1);
 
         this._scene.add(this._mesh);
+    }
+
+    _setupGradientTimeline() {
+        this._timelineProgress = 0;
+        this._timeline = new TimelineLite({ paused: true });
+        this._timeline.to(this._uniforms.u_secondary_position, 1, { value: 0.0, ease: Power0.easeNone });
+        this._timeline.set(this._uniforms.u_primary_color, { value: this._uniforms.u_secondary_color.value, ease: Power0.easeNone });
+        this._timeline.set(this._uniforms.u_secondary_color, { value: this._uniforms.u_third_color.value, ease: Power0.easeNone });
+        this._timeline.set(this._uniforms.u_primary_position, { value: 0.0 });
+        this._timeline.set(this._uniforms.u_secondary_position, { value: 4.0 });
+        this._timeline.to(this._uniforms.u_secondary_position, 2, { value: 0.0, ease: Power0.easeNone });
     }
 
     _bindAll() {
@@ -82,14 +96,17 @@ class ThreeBackgroundPlane {
     }
 
     _startHandler() {
-        TweenLite.to(this._uniforms.u_secondary_position, 1, { value: 0.5, ease: Power3.easeInOut });
+        TweenLite.to(this._uniforms.u_secondary_position, 1, { value: 0.6, ease: Power3.easeInOut });
     }
 
     _scrollHandler(e) {
         const delta = e.delta;
 
-        // console.log(this._uniforms.u_secondary_position.value);
-        // this._uniforms.u_secondary_position.value += 0.001 * -delta;
+        this._timelineProgress += 0.0005 * -delta;
+
+        if (this._timelineProgress.toFixed(2) < 0 || this._timelineProgress.toFixed(2) > 1) return;
+        this._timeline.progress(this._timelineProgress.toFixed(2));
+        // console.log(this._timelineProgress.toFixed(2));
     }
 }
 
