@@ -47,8 +47,6 @@ function setupScene(e) {
         antialias: true
     });
 
-    // renderer.setClearColor(0x000000);
-
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
@@ -59,11 +57,11 @@ function setupScene(e) {
     scene.add(container);
 
     // cube test
-    // let cubeGeo = new THREE.BoxGeometry(100, 100, 100);
-    // let cubeMaterial = new THREE.MeshStandardMaterial(0xffffff);
-    // cube = new THREE.Mesh(cubeGeo, cubeMaterial);
+    let cubeGeo = new THREE.BoxGeometry(100, 100, 100);
+    let cubeMaterial = new THREE.MeshStandardMaterial(0xffffff);
+    cube = new THREE.Mesh(cubeGeo, cubeMaterial);
 
-    // container.add(cube);
+    container.add(cube);
 }
 
 function resize(e) {
