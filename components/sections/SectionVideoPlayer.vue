@@ -5,7 +5,7 @@
                 <div data-scroll data-scroll-offset="200" class="heading section-video-player__heading js-heading-split">
                     {{ data.fields.title }}
                 </div>
-                <VideoPlayer :video="data.fields.video" />
+                <VideoPlayer :poster="data.fields.poster" :video="data.fields.video" />
             </div>
         </div>
     </section>

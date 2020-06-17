@@ -1,6 +1,6 @@
 <template>
     <div class="video-player" data-scroll data-scroll-offset="200">
-        <video class="video-player__video js-video" playsinline>
+        <video :poster="poster.fields.file.url" class="video-player__video js-video" playsinline>
             <source :src="'https://serge-bocancea.fr/WholeDemo.mp4'" type="video/mp4">
             <source :src="'https://serge-bocancea.fr/WholeDemo.webm'" type="video/webm">
             <!-- <source :src="video[0].fields.file.url" type="video/mp4">
@@ -24,6 +24,10 @@ export default {
     props: {
         video: {
             type: Array,
+            required: false
+        },
+        poster: {
+            type: Object,
             required: false
         }
     },

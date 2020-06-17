@@ -12,6 +12,15 @@
     .video-player__video {
         transform: scale(1.2);
         transition: transform 2s $Power3Out;
+
+        object-fit: cover;
+    }
+
+    video[poster] {
+        height: 100%;
+        width: 100%;
+
+        object-fit: cover;
     }
 
     &.isInView {
