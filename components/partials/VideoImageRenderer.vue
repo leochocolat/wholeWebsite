@@ -1,7 +1,7 @@
 <template>
     <video v-if="video" autoplay playsinline loop muted class="video-image-renderer__video">
-        <source :src="video[0].fields.file.url" type="video/mp4">
-        <source :src="video[1].fields.file.url" type="video/webm">
+        <source v-if="video[0]" :src="video[0].fields.file.url" type="video/mp4">
+        <source v-if="video[1]" :src="video[1].fields.file.url" type="video/webm">
     </video>
     <img v-else class="video-image-renderer__image" :src="image.fields.file.url" alt="">
 </template>
@@ -19,6 +19,7 @@ export default {
         },
     },
     mounted() {
+        
         // url : this.video.fields.file.url
     }
 }

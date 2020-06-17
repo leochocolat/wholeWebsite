@@ -10,7 +10,7 @@
         }
 
         .section-boid__video {
-            transform: scale(1);
+            transform: scale(1.15);
         }
 
         .section-boid__description {
@@ -43,7 +43,7 @@
     width: 100%;
     height: auto;
 
-    transform: scale(1.2);
+    transform: scale(1.35);
     transition: transform 2s $Power3Out;
 }
 
@@ -88,6 +88,5 @@
 @include mq-extra-narrow {
     .section-boid {
         min-height: 50vh;
-
     }
 }
