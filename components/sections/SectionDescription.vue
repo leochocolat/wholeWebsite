@@ -8,10 +8,10 @@
             </div>
             <div class="section-description__images-container">
                 <div class="section-description__image-container section-description__image-container--left" data-scroll data-scroll-offset="200" data-scroll-speed="0.15" data-scroll-position="elementTop">
-                    <img class="section-description__image" :src="data.fields.imageLeft" alt="">
+                    <img class="section-description__image" :src="data.fields.imageLeft.fields.file.url" alt="">
                 </div>
                 <div class="section-description__image-container section-description__image-container--right" data-scroll data-scroll-offset="200">
-                    <img class="section-description__image" :src="data.fields.imageRight" alt="">
+                    <img class="section-description__image" :src="data.fields.imageRight.fields.file.url" alt="">
                 </div>
             </div>
         </div>
