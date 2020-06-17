@@ -3,6 +3,7 @@
     <div class="js-scroll-content">
       <SectionIntro :data="sectionIntro" />
       <SectionDescription :data="sectionDescription" />
+      <SectionBoid :data="''" />
       <SectionVideoPlayer :data="sectionDemonstration" />
       <Footer :data="footer" />
     </div>
@@ -20,6 +21,7 @@ import SectionExample from '~/components/SectionExample';
 import SectionVideoPlayer from '~/components/sections/SectionVideoPlayer';
 import SectionIntro from '~/components/sections/SectionIntro';
 import SectionDescription from '~/components/sections/SectionDescription';
+import SectionBoid from '~/components/sections/SectionBoid';
 
 export default {
   data() { return { namespace: 'home' } },
@@ -29,7 +31,8 @@ export default {
     Footer,
     SectionVideoPlayer,
     SectionIntro,
-    SectionDescription
+    SectionDescription,
+    SectionBoid
   },
   asyncData({ env }) {
     return Promise.all([

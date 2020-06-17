@@ -266,7 +266,6 @@ function mousemove(e) {
 
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects([hitArea]);
-    console.log(intersects);
 
     if (intersects.length > 0) {
         plane.setFromNormalAndCoplanarPoint(camera.getWorldDirection(plane.normal), intersects[0].object.position);

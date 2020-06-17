@@ -1,0 +1,86 @@
+.section-boid {
+    position: relative;
+
+    margin-top: 200px;
+    min-height: 100vh;
+
+    &.isInView {
+        .section-boid__video-container {
+            opacity: 1;
+        }
+
+        .section-boid__video {
+            transform: scale(1);
+        }
+
+        .section-boid__description {
+            opacity: 1;
+        }
+
+        .animated-line {
+            transform: translateY(0);
+        }
+    }
+}
+
+.section-boid__video-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    width: calc(#{size(15, 24)} + 200px);
+
+    font-size: 0px;
+    overflow: hidden;
+
+    opacity: 0;
+    transition: opacity 2s $Power3Out;
+}
+
+.section-boid__video {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    transform: scale(1.2);
+    transition: transform 2s $Power3Out;
+}
+
+.section-boid__content {
+    position: absolute;
+    left: size(2, 25);
+    top: 200px;
+
+    width: size(16, 24);
+}
+
+.section-boid__title {
+    margin-bottom: 25px;
+
+    .line {
+        overflow: hidden;
+    }
+
+    .animated-line {
+        transform: translateY(105%);
+        transition: transform 1.5s $Power3Out;
+
+        @for $i from 0 to 10 {
+            &--#{$i} {
+                transition-delay: #{$i * 0.1}s;
+            }
+        }
+    }
+}
+
+.section-boid__description {
+    opacity: 0;
+    transition: opacity 1s $Power1InOut;
+}
+
+@include mq-regular {
+    .section-boid__content {
+        width: size(6, 24);
+    }
+}
