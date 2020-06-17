@@ -4,18 +4,22 @@ import { TweenLite, Power3 } from 'gsap';
 import fragment from '../shaders/particles/fragment.glsl';
 import vertex from '../shaders/particles/vertex.glsl';
 
+import TouchTexture from '../modules/threeModules/TouchTexture';
+
 const PESPECTIVE = 800;
 let width, height, dpr;
 let canvas, renderer, scene, camera, container;
-let fov;
-let imageSize, imageData, texture, uniforms;
+let fov, raycaster, intersectionData;
+let imageSize, imageData, texture, uniforms, hitArea, touchTexture;
+let mouse, offset, intersection, plane;
 let mesh, cube;
 
 const handlers = {
     setup,
     resize,
     imageDataReady,
-    transitionOut
+    transitionOut,
+    mousemove,
 };
 
 if (typeof self === "object") {
@@ -30,9 +34,15 @@ if (typeof self === "object") {
 }
 
 function setup(e) {
+    setupTouchTexture(e);
     setupScene(e);
+    setupInteractiveMouse(e);
     loadTexture();
     update();
+}
+
+function setupTouchTexture(e) {
+    touchTexture = new TouchTexture();
 }
 
 function transitionIn() {
@@ -48,7 +58,6 @@ function transitionOut() {
 }
 
 function loadTexture() {
-    // let url = 'https://res.cloudinary.com/dgxpb4jhs/image/upload/v1592322434/sample-01_plvqsx.png';
     let url = '../images/whole-texture.jpg';
     const loader = new THREE.ImageBitmapLoader();
     loader.load(url, response => {
@@ -78,12 +87,18 @@ function setupScene(e) {
     fov = (180 * (2 * Math.atan(height / 2 / PESPECTIVE))) / Math.PI;
 
     camera = new THREE.PerspectiveCamera(fov, width / height, 1, 1000);
-    // camera.position.z = 300;
-    // camera.set(0, 0, PESPECTIVE);
 
     container = new THREE.Object3D();
 
     scene.add(container);
+}
+
+function setupInteractiveMouse() {
+    plane = new THREE.Plane();
+    raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
+    offset = new THREE.Vector3();
+    intersection = new THREE.Vector3();
 }
 
 function resize(e) {
@@ -104,6 +119,15 @@ function resize(e) {
     camera.updateProjectionMatrix();
 }
 
+function initHitArea() {
+    const geometry = new THREE.PlaneGeometry(imageSize.width, imageSize.height, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF, wireframe: true, depthTest: false });
+    material.visible = false;
+    hitArea = new THREE.Mesh(geometry, material);
+    hitArea.position.set(0, 0, -200);
+    container.add(hitArea);
+}
+
 function setupParticules() {
     //filter
     const numPoints = imageSize.width * imageSize.height;
@@ -117,8 +141,6 @@ function setupParticules() {
         if (originalColors[i * 4 + 0] > threshold) numVisible++;
     }
 
-    //console.log('numVisible : ', numVisible, 'numPoints : ', numPoints);
-
     //points
     uniforms = {
         uTime: { value: 0.0 },
@@ -127,7 +149,7 @@ function setupParticules() {
         uSize: { value: 0.0 },
         uTextureSize: { value: new THREE.Vector2(imageSize.width, imageSize.height) },
         uTexture: { value: texture },
-        uTouch: { value: null }
+        uTouch: { value: touchTexture.texture }
     };
 
     const material = new THREE.RawShaderMaterial({
@@ -197,16 +219,37 @@ function update() {
         mesh.material.uniforms.uTime.value += 0.1;
     }
 
+    touchTexture.update();
+
     renderer.render(scene, camera);
 
     requestAnimationFrame(update);
 }
 
+function mousemove(e) {
+    if (!hitArea) return;
+    
+    mouse.x = ((e.mousePosition.x + 0) / width) * 2 - 1;
+    mouse.y = -((e.mousePosition.y + 0) / height) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects([hitArea]);
+    console.log(intersects);
+
+    if (intersects.length > 0) {
+        plane.setFromNormalAndCoplanarPoint(camera.getWorldDirection(plane.normal), intersects[0].object.position);
+        intersectionData = intersects[0];
+
+        const uv = intersectionData.uv;
+        if (touchTexture) touchTexture.addTouch(uv);
+    }
+}
 
 function imageDataReady(e) {
     imageSize = e.size;
     imageData = e.imageData;
 
     setupParticules();
+    initHitArea();
     transitionIn();
 }

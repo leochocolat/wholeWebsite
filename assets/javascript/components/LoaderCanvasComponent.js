@@ -22,7 +22,6 @@ class LoaderCanvasComponent {
             this._setupCanvas();
             this._resize();
             this._setupOffscreenCanvas();
-            // this._loadTexture();
             this._setupEventListeners();
         }
     }
@@ -110,13 +109,15 @@ class LoaderCanvasComponent {
         bindAll(
             this,
             '_resizeHandler',
-            '_setupImageData'
+            '_setupImageData',
+            '_mousemoveHandler'
         );
     }
 
     _setupEventListeners() {
         Emitter.on('RESIZE:END', this._resizeHandler);
-        this._worker.addEventListener('message', this._setupImageData.bind(this))
+        this._worker.addEventListener('message', this._setupImageData.bind(this));
+        window.addEventListener('mousemove', this._mousemoveHandler);
     }
 
     _resizeHandler(e) {
@@ -126,6 +127,13 @@ class LoaderCanvasComponent {
     _sendWoker(object) {
         return JSON.parse(JSON.stringify(object));
     };
+
+    _mousemoveHandler(e) {
+        this._worker.postMessage({
+            type: 'mousemove',
+            mousePosition: { x: e.clientX, y: e.clientY },
+        }, []);
+    }
 
 }
 
