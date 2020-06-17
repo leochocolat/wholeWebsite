@@ -4,14 +4,18 @@ import { TweenLite, Power3 } from 'gsap';
 import fragment from '../shaders/particles/fragment.glsl';
 import vertex from '../shaders/particles/vertex.glsl';
 
+import fragmentBg from '../shaders/fragment.glsl';
+import vertexBg from '../shaders/vertex.glsl';
+
 import TouchTexture from '../modules/threeModules/TouchTexture';
 
 const PESPECTIVE = 800;
+
 let width, height, dpr;
 let canvas, renderer, scene, camera, container;
 let fov, raycaster, intersectionData;
 let imageSize, imageData, texture, uniforms, hitArea, touchTexture;
-let mouse, offset, intersection, plane;
+let mouse, offset, intersection, plane, gradientPlane;
 let mesh, cube;
 
 const handlers = {
@@ -36,6 +40,7 @@ if (typeof self === "object") {
 function setup(e) {
     setupTouchTexture(e);
     setupScene(e);
+    setupBackground(e);
     setupInteractiveMouse(e);
     loadTexture();
     update();
@@ -91,6 +96,33 @@ function setupScene(e) {
     container = new THREE.Object3D();
 
     scene.add(container);
+}
+
+function setupBackground() {
+    let backgroundUniforms = {
+        u_resolution: { value: new THREE.Vector3(width, height, 0) },
+        u_time: { value: 0 },
+        u_delta_time: { value: 17 },
+        u_fps: { value: 60 },
+        //colors
+        u_primary_color: { value: new THREE.Color(0x393C60), type : 'c' },
+        u_primary_position: { value: 0.0 },
+        u_secondary_color: { value: new THREE.Color(0x111737), type : 'c' },
+        u_secondary_position: { value: 0.5 },
+    }
+
+    let backgroundGeometry = new THREE.PlaneGeometry(1, 1, 1);
+    let geometryMaterial = new THREE.ShaderMaterial({
+        uniforms: backgroundUniforms,
+        fragmentShader: fragmentBg,
+        vertexShader: vertexBg,
+    });
+
+    let backgroundPlane = new THREE.Mesh(backgroundGeometry, geometryMaterial);
+    backgroundPlane.scale.set(width, -height, 100);
+    backgroundPlane.position.set(0, 0, -210);
+
+    container.add(backgroundPlane);
 }
 
 function setupInteractiveMouse() {
