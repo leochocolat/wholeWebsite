@@ -29,6 +29,14 @@ module.exports = {
   plugins: [
     '~/plugins/listeners.client',
   ],
+  // server: {
+  //   port: 8000, // par défaut : 3000
+  //   host: '0.0.0.0' // par défaut : localhost
+  // },
+  // server: {
+  //   port: 3000, // par défaut : 3000
+  //   host: '0.0.0.0' // par défaut : localhost
+  // },
   /*
   ** Build configuration
   */

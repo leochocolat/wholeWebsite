@@ -84,3 +84,10 @@
         width: size(6, 24);
     }
 }
+
+@include mq-extra-narrow {
+    .section-boid {
+        min-height: 50vh;
+
+    }
+}

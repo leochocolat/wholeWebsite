@@ -28,6 +28,8 @@ class ThreeBackgroundPlane {
     }
 
     resize(width, height) {
+        console.log('resize');
+
         this._width = width;
         this._height = height;
 

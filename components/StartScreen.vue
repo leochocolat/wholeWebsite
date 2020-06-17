@@ -10,7 +10,7 @@
             <div class="start-screen__start-button-container js-button-container">
                 <div class="start-screen__start-button-label-container js-button" @click="startExperience">
                     <span class="start-screen__start-button-label js-start-label">
-                        Explore
+                        Click &nbsp to &nbsp Explore
                     </span>
                     <span class="start-screen__start-button-label js-loading-label">
                         Loading

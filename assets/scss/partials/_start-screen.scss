@@ -4,7 +4,9 @@
     top: 0;
 
     width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
+
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);//100vh on mobile devices
 
     background-color: transparentize($color: $blue, $amount: 0);
     opacity: 0;
@@ -28,7 +30,7 @@
 .start-screen__container {
     position: relative;
 
-    height: 100vh;
+    height: 100%;
 }
 
 .start-screen__start-button-container {
@@ -50,11 +52,14 @@
 
     cursor: pointer;
 
-    &:hover, &.is-active {
-        .start-screen__start-button-circle {
-            transform: scale(1.2);
+    @media (hover: hover) {
+        &:hover, &.is-active {
+            .start-screen__start-button-circle {
+                transform: scale(1.2);
+            }
         }
     }
+
 }
 
 .start-screen__start-button-label-container {
@@ -165,4 +170,10 @@
 
     //to remove
     display: none;
+}
+
+@include mq-extra-narrow {
+    .start-screen__start-button-container {
+        bottom: 20px;
+    }
 }

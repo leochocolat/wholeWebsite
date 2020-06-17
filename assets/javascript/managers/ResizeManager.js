@@ -1,8 +1,9 @@
 import EventDispatcher from '../events/EventDispatcher';
+import DeviceUtils from '../utils/DeviceUtils';
 
 import bindAll from '../utils/bindAll';
 
-const THROTTLE_VALUE = 200;
+const THROTTLE_VALUE = 50;
 const MIN_HEIGHT_RESIZE = 1;
 
 class ResizeManager extends EventDispatcher {
@@ -49,12 +50,16 @@ class ResizeManager extends EventDispatcher {
     }
 
     _setupEventListeners() {
-        window.addEventListener('resize', this._resizeHandler);
+        // const resizeEvent = (DeviceUtils.isTablet() || DeviceUtils.isMobile()) ? 'orientationchange' : 'resize';
+        const resizeEvent = 'resize';
+        window.addEventListener(resizeEvent, this._resizeHandler);
     }
 
     _resizeHandler() {
         this._getViewportSize();
         this._getDocumentSize();
+
+        console.log('resize');
 
         this.dispatchEvent('resize', {
             viewportWidth: this._viewportWidth,

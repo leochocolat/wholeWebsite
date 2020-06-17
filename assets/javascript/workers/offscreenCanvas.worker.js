@@ -52,7 +52,7 @@ function setupTouchTexture(e) {
 
 function transitionIn() {
     TweenLite.to(uniforms.uSize, 1, { value: 0.3, ease: Power3.easeInOut });
-    TweenLite.to(uniforms.uRandom, 1, { value: 5.0, ease: Power3.easeInOut });
+    TweenLite.to(uniforms.uRandom, 1, { value: 7.0, ease: Power3.easeInOut });
     TweenLite.fromTo(uniforms.uDepth, 2, { value: 20.0 }, { value: 0.4, ease: Power3.easeInOut });
 }
 

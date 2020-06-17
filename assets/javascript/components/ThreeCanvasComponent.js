@@ -23,6 +23,7 @@ class ThreeCanvasComponent {
             this._worker.postMessage({
                 name: 'close',
             }, []);
+            this._worker.terminate();
         } else {
 
         }
@@ -52,6 +53,8 @@ class ThreeCanvasComponent {
         } else {
             this.el.width = this._width;
             this.el.height = this._height;
+
+            this._threeScene.resize(this._width, this._height, this._devicePixelRatio);
         }
     }
 
