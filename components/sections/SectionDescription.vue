@@ -8,10 +8,10 @@
             </div>
             <div class="section-description__images-container">
                 <div class="section-description__image-container section-description__image-container--left" data-scroll data-scroll-offset="200" data-scroll-speed="0.15" data-scroll-position="elementTop">
-                    <img class="section-description__image" src="https://images.unsplash.com/photo-1549074862-6173e20d02a8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
+                    <img class="section-description__image" :src="data.fields.imageLeft" alt="">
                 </div>
                 <div class="section-description__image-container section-description__image-container--right" data-scroll data-scroll-offset="200">
-                    <img class="section-description__image" src="https://images.unsplash.com/photo-1525467187333-8e3f68b8e742?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
+                    <img class="section-description__image" :src="data.fields.imageRight" alt="">
                 </div>
             </div>
         </div>

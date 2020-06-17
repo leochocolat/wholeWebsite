@@ -3,7 +3,7 @@
     <div class="js-scroll-content">
       <SectionIntro :data="sectionIntro" />
       <SectionDescription :data="sectionDescription" />
-      <SectionBoid :data="''" />
+      <SectionBoid :data="sectionBoid" />
       <SectionVideoPlayer :data="sectionDemonstration" />
       <Footer :data="footer" />
     </div>
@@ -43,15 +43,19 @@ export default {
         'content_type': 'sectionDescription',
       }),
       client.getEntries({
+        'content_type': 'sectionBoid',
+      }),
+      client.getEntries({
         'content_type': 'sectionDemonstration',
       }),
       client.getEntries({
         'content_type': 'footer',
       }),
-    ]).then(([sectionIntro, sectionDescription, sectionDemonstration, footer]) => {
+    ]).then(([sectionIntro, sectionDescription, sectionBoid, sectionDemonstration, footer]) => {
       return {
         sectionIntro: sectionIntro.items[0],
         sectionDescription: sectionDescription.items[0],
+        sectionBoid: sectionBoid.items[0],
         sectionDemonstration: sectionDemonstration.items[0],
         footer: footer.items[0],
       }

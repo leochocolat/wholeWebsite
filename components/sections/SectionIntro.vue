@@ -12,13 +12,14 @@
                 </div>
             </div>
             <div class="section-intro__video-container" data-scroll data-scroll-offset="500">
-                <img class="section-intro__video" src="https://images.unsplash.com/photo-1525838983331-f8bd3c000585?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" alt="">
+                <VideoImageRenderer class="section-intro__video" :image="data.fields.image ? data.fields.image : undefined" :video="data.fields.video ? data.fields.video : undefined" />
             </div>
         </div>
     </section>
 </template>
 
 <script>
+import VideoImageRenderer from '~/components/partials/VideoImageRenderer';
 import SplitText from '~/assets/javascript/vendors/SplitText.js';
 
 export default {
@@ -27,6 +28,9 @@ export default {
             type: Object,
             required: false      
         }
+    },
+    components: {
+        VideoImageRenderer
     },
     mounted() {
         const el = this.$el.querySelector('.js-heading-split');
@@ -42,6 +46,6 @@ export default {
                 linesClass: `animated-line animated-line--${i}`,
             });
         }
-    }   
+    }
 }
 </script>

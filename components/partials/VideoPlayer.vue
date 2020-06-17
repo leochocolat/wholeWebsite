@@ -1,8 +1,8 @@
 <template>
     <div class="video-player" data-scroll data-scroll-offset="200">
         <video class="video-player__video js-video" playsinline>
-            <!-- <source :src="`https://storage.googleapis.com/webfundamentals-assets/videos/chrome.webm`" type="video/mp4"> -->
-            <source :src="`https://storage.googleapis.com/webfundamentals-assets/videos/chrome.webm`" type="video/webm">
+            <source :src="video[0].fields.file.url" type="video/mp4">
+            <source :src="video[1].fields.file.url" type="video/webm">
             <p>This browser does not support the video element.</p>
         </video>
         <button class="video-player__button is-active js-play-button">
@@ -19,6 +19,12 @@
 import VideoPlayerComponent from '~/assets/javascript/components/VideoPlayerComponent';
 
 export default {
+    props: {
+        video: {
+            type: Array,
+            required: false
+        }
+    },
     mounted() {
         this._videoplayerComponent = new VideoPlayerComponent({ el: this.$el });
     }

@@ -1,17 +1,15 @@
 <template>
     <section class="section-boid" data-scroll data-scroll-offset="200">
         <div class="section-boid__video-container">
-            <video class="section-boid__video" autoplay loop playsinline>
-                <source :src="`https://storage.googleapis.com/webfundamentals-assets/videos/chrome.webm`" type="video/webm">
-            </video>
+            <VideoImageRenderer class="section-boid__video" :image="data.fields.image ? data.fields.image : undefined" :video="data.fields.video ? data.fields.video : undefined" />
         </div>
         <div class="section-boid__container container">
             <div class="section-boid__content" data-scroll data-scroll-offset="200" data-scroll-position="elementTop" data-scroll-speed="0.1">
                 <div class="section-boid__title heading js-heading-split" >
-                    Une ode à la nature
+                    {{ data.fields.title }}
                 </div>
                 <div class="section-boid__paragraph paragraph">
-                    Whole combine art, technologie et données scientifiques pour sensibiliser le public à ce fragile écosystème en encourageant les interactions sociales et la collaboration.
+                    {{ data.fields.description }}
                 </div>
             </div>
         </div>
@@ -20,8 +18,18 @@
 
 <script>
 import SplitText from '~/assets/javascript/vendors/SplitText.js';
+import VideoImageRenderer from '~/components/partials/VideoImageRenderer';
 
 export default {
+    props: {
+        data: {
+            type: Object,
+            required: false      
+        }
+    },
+    components: {
+        VideoImageRenderer
+    },
     mounted() {
         const el = this.$el.querySelector('.js-heading-split');
 
