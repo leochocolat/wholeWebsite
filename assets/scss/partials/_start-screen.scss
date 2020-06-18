@@ -128,6 +128,7 @@
     overflow: visible;
 
     transition: transform 0.8s $Power3Out;
+    will-change: transform;
 
     circle {
         fill: transparent;

@@ -12,6 +12,7 @@
     .video-player__video {
         transform: scale(1.2);
         transition: transform 2s $Power3Out;
+        will-change: transform;
 
         object-fit: cover;
     }
@@ -87,6 +88,7 @@
     background-color: transparent;
     border: solid 1px $white;
     transition: transform 1s $Power3Out;
+    will-change: transform;
 }
 
 .video-player__button-svg {
