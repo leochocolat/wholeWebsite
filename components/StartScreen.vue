@@ -46,14 +46,11 @@ export default {
     methods: {
         setup() {
             this._loaderComponent = new LoaderComponent({ el: this.$el });
-
-            // Emitter.on('SNAP', this.startExperience);
         },
         startExperience(e) {
             if (!this._loaderComponent.isComplete) return;
 
             this.$el.querySelector('.js-button').classList.add('is-active');
-            // Emitter.removeListener('SNAP', this.startExperience);
 
             this.transitionOut();
         },
