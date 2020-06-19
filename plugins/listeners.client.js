@@ -3,7 +3,6 @@ import DeviceUtils from '~/assets/javascript/utils/DeviceUtils';
 import Emitter from '~/assets/javascript/events/Emitter';
 import ResizeManager from '~/assets/javascript/managers/ResizeManager';
 import ScrollManager from '../assets/javascript/managers/ScrollManager';
-// import SnapScrollManager from '../assets/javascript/managers/SnapScrollManager';
 
 export default ({ store }) => {
     function setup() {
@@ -24,7 +23,6 @@ export default ({ store }) => {
         ResizeManager.addEventListener('resize:end', resizeEndHandler);
         ScrollManager.addEventListener('scroll', scrollHandler);
         ScrollManager.addEventListener('scroll:end', scrollEndHandler);
-        // SnapScrollManager.addEventListener('wheel:snap', snapScrollHandler);
     }
 
     function resizeHandler(e) {
@@ -47,10 +45,6 @@ export default ({ store }) => {
 
     function scrollHandler(e) {
         Emitter.emit('SCROLL', e);
-    }
-
-    function snapScrollHandler(e) {
-        Emitter.emit('SNAP', e);
     }
 
     setup();

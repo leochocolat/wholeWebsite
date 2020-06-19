@@ -134,8 +134,8 @@ class ScrollModule {
     }
 
     _setupEventListeners() {
-        ScrollManager.addEventListener('scroll', this._scrollHandler);
-        ScrollManager.addEventListener('scroll:end', this._scrollEndHandler);
+        Emitter.on('SCROLL', this._scrollHandler, { passive: true });
+        Emitter.on('SCROLL:END', this._scrollEndHandler, { passive: true });
 
         ScrollTriggerManager.addEventListener('call', this._callHandler);
 
@@ -147,8 +147,8 @@ class ScrollModule {
     }
 
     _removeEventListeners() {
-        ScrollManager.removeEventListener('scroll', this._scrollHandler);
-        ScrollManager.removeEventListener('scroll:end', this._scrollEndHandler);
+        Emitter.removeListener('SCROLL', this._scrollHandler);
+        Emitter.removeListener('SCROLL:END', this._scrollEndHandler);
 
         ScrollTriggerManager.removeEventListener('call', this._callHandler);
         ScrollTriggerManager.removeEventListeners();

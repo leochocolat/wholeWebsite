@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ThreeScene />
+    <!-- <ThreeScene /> -->
     <nuxt/>
     <Navbar />
     <StartScreen />

@@ -93,8 +93,8 @@ class ThreeBackgroundPlane {
     }
 
     _setupEventListeners() {
-        Emitter.on('START:EXPERIENCE', this._startHandler);
-        Emitter.on('SCROLL', this._scrollHandler);
+        Emitter.on('START:EXPERIENCE', this._startHandler, { passive: true });
+        Emitter.on('SCROLL', this._scrollHandler, { passive: true });
     }
 
     _startHandler() {

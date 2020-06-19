@@ -85,9 +85,9 @@ class ThreeParticleSystem {
     }
 
     _setupEventListeners() {
-        Emitter.on('SCROLL', this._scrollHandler);
-        Emitter.on('SEA:ENTER', this._seaEnterHandler);
-        Emitter.on('SEA:EXIT', this._seaLeaveHandler);
+        Emitter.on('SCROLL', this._scrollHandler, { passive: true });
+        Emitter.on('SEA:ENTER', this._seaEnterHandler, { passive: true });
+        Emitter.on('SEA:EXIT', this._seaLeaveHandler, { passive: true });
     }
 
     _scrollHandler(e) {

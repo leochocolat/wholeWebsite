@@ -89,8 +89,8 @@ class ThreeLightHouse {
     }
 
     _setupEventListeners() {
-        Emitter.on('SCROLL', this._scrollHandler);
-        Emitter.on('START:EXPERIENCE', this._startHandler);
+        Emitter.on('SCROLL', this._scrollHandler, { passive: true });
+        Emitter.on('START:EXPERIENCE', this._startHandler, { passive: true });
     }
 
     _scrollHandler(e) {

@@ -141,8 +141,8 @@ class ThreeSceneComponent {
 
     _setupEventListeners() {
         gsap.ticker.add(this._tickHandler);
-        Emitter.on('SCROLL', this._scrollHandler);
-        Emitter.on('RESIZE:END', this._resizeHandler);
+        Emitter.on('SCROLL', this._scrollHandler, { passive: true });
+        Emitter.on('RESIZE:END', this._resizeHandler, { passive: true });
     }
 
     _removeEventListeners() {

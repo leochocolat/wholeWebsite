@@ -7,7 +7,6 @@ import bindAll from '../utils/bindAll';
 import lerp from '../utils/lerp';
 import { TweenLite } from 'gsap';
 
-
 /**
  * TODO:
  * * add Sticky option
@@ -245,7 +244,7 @@ class ScrollTriggerManager extends EventDispatcher {
     _setSectionInView(section) {
         section.inView = true;
         // section.el.classList.add('isInView');
-        section.el.style.visibility = 'auto';
+        section.el.style.visibility = 'visible';
     }
     
     _setSectionOutOfView(section) {
