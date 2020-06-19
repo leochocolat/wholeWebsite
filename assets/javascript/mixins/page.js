@@ -19,8 +19,9 @@ export default {
             this._scrollModule = new ScrollModule({
                 container: this.$el,
                 content: this.$el.querySelector('.js-scroll-content'),
+                // smooth: false
                 smooth: true,
-                smoothValue: 0.1
+                // smoothValue: 0.1
             });            
         },
         _setupSession() {

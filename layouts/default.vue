@@ -1,6 +1,6 @@
 <template>
   <div>
-   <ThreeScene />
+    <ThreeScene />
     <nuxt/>
     <Navbar />
     <StartScreen />
@@ -20,6 +20,8 @@ export default {
     StartScreen,
     Grid,
     Navbar
+  },
+  mounted() {
   }
 }
 </script>

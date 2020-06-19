@@ -1,5 +1,5 @@
 <template>
-    <section class="section-intro">
+    <section class="section-intro" data-scroll-section>
         <div class="section-intro__container container">
             <div class="section-intro__content">
                 <p class="section-intro__paragraph paragraph" data-scroll data-scroll-speed="0.3" data-scroll-delay="0.2" data-scroll-position="top">

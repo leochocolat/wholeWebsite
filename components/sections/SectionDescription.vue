@@ -1,5 +1,5 @@
 <template>
-    <section class="section-description">
+    <section class="section-description" data-scroll-section>
         <div class="section-description__container container">
             <div class="section-description__content">
                 <div data-scroll data-scroll-speed="0.2" data-scroll-position="elementTop" data-scroll-offset="200" class="section-description__heading heading js-heading-split">

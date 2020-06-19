@@ -25,6 +25,7 @@ class ScrollTriggerManager extends EventDispatcher {
         );
 
         this.triggers = [];
+        this.triggerSections = [];
     }
     
     /**
@@ -59,6 +60,26 @@ class ScrollTriggerManager extends EventDispatcher {
     */
     _setupTriggers() {
         const elements = this.el.querySelectorAll('[data-scroll]');
+        const sections = this.el.querySelectorAll('[data-scroll-section]');
+
+        console.log(sections);
+
+        for (let i = 0; i < sections.length; i++) {
+            const section = sections[i];
+            const className = section.dataset.scrollClass;
+            let top = section.getBoundingClientRect().top + ScrollManager.getPosition().y;
+            let bottom = top + section.offsetHeight; 
+            
+            const triggerSection = {
+                el: section,
+                class: className,
+                top: top,
+                bottom: bottom,
+                inView: false
+            }
+
+            this.triggerSections.push(triggerSection);
+        }
 
         for (let i = 0; i < elements.length; i++) {
             const element = elements[i];
@@ -128,6 +149,22 @@ class ScrollTriggerManager extends EventDispatcher {
                 if (!DeviceUtils.isTouch()) {
                     this._transformElement(element);
                 };
+            }
+        }
+
+        for (let i = 0; i < this.triggerSections.length; i++) {
+            const section = this.triggerSections[i];
+
+            if (!section.inView) {
+                if ((scrollBottom >= section.top) && (scrollTop < section.bottom)) {
+                    this._setSectionInView(section);
+                }
+            }
+
+            if (section.inView) {
+                if ((scrollBottom < section.top) || (scrollTop > section.bottom)) {
+                    this._setSectionOutOfView(section);
+                }
             }
         }
     }
@@ -203,6 +240,18 @@ class ScrollTriggerManager extends EventDispatcher {
         if (trigger.repeat) {
             trigger.el.classList.remove('isInView');
         }
+    }
+
+    _setSectionInView(section) {
+        section.inView = true;
+        // section.el.classList.add('isInView');
+        section.el.style.visibility = 'auto';
+    }
+    
+    _setSectionOutOfView(section) {
+        section.inView = false;
+        // section.el.classList.remove('isInView');
+        section.el.style.visibility = 'hidden';
     }
 
     _dispatchCallEvent(trigger, state) {

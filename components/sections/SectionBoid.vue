@@ -1,6 +1,6 @@
 <template>
-    <section class="section-boid" data-scroll data-scroll-offset="200">
-        <div class="section-boid__video-container">
+    <section class="section-boid" data-scroll-section>
+        <div class="section-boid__video-container" data-scroll data-scroll-offset="200">
             <VideoImageRenderer class="section-boid__video" :image="data.fields.image ? data.fields.image : undefined" :video="data.fields.video ? data.fields.video : undefined" />
         </div>
         <div class="section-boid__container container">

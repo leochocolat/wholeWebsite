@@ -3,24 +3,6 @@
 
     margin-top: 200px;
     min-height: 100vh;
-
-    &.isInView {
-        .section-boid__video-container {
-            opacity: 1;
-        }
-
-        .section-boid__video {
-            transform: scale(1.15);
-        }
-
-        .section-boid__description {
-            opacity: 1;
-        }
-
-        .animated-line {
-            transform: translateY(0);
-        }
-    }
 }
 
 .section-boid__video-container {
@@ -35,6 +17,14 @@
 
     opacity: 0;
     transition: opacity 2s $Power3Out;
+
+    &.isInView {
+        opacity: 1;
+
+        .section-boid__video {
+            transform: scale(1.15);
+        }
+    }
 }
 
 .section-boid__video {
@@ -54,6 +44,16 @@
     top: 200px;
 
     width: size(16, 24);
+
+    &.isInView {
+        .section-boid__description {
+            opacity: 1;
+        }
+
+        .animated-line {
+            transform: translateY(0);
+        }
+    }
 }
 
 .section-boid__title {
