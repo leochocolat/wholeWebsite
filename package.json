@@ -17,7 +17,7 @@
     "dat.gui": "^0.7.7",
     "events": "^3.1.0",
     "glsl-noise": "0.0.0",
-    "gsap": "^3.2.6",
+    "gsap": "^3.6.0",
     "three": "^0.117.1",
     "virtual-scroll": "^1.5.2"
   },
